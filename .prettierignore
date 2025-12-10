@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+build
+public
+*.min.js
+*.css
+*.svg
+.DS_Store
