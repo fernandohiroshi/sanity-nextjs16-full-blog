@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
-import Header from '@/components/layout/header/header'
-import Footer from '@/components/layout/footer/footer'
+import Header from '@/components/layout/header'
+import Footer from '@/components/layout/footer'
 import WhatsAppFloatButton from '@/components/whatsapp-float-button'
 
 export const metadata: Metadata = {

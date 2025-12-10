@@ -1,7 +1,7 @@
-import HeroSection from '@/components/sections/hero/hero'
-import TicketSection from '@/components/sections/ticket/ticket'
-import AboutSection from '@/components/sections/about/about'
-import ArticlesSection from '@/components/sections/articles/articles'
+import HeroSection from '@/components/sections/hero'
+import TicketSection from '@/components/sections/ticket'
+import AboutSection from '@/components/sections/about'
+import ArticlesSection from '@/components/sections/articles'
 
 export default function Home() {
   return (

@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/sheet'
 import { Menu } from 'lucide-react'
 
-import { categories } from '@/components/sections/articles/articles-data'
+import { categories } from '@/components/sections/articles/categories-data'
 import { mainLinks, socialLinks } from './side-menu-data'
 
 export const SideMenu = () => {
