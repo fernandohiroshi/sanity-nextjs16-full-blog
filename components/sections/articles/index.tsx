@@ -12,15 +12,14 @@ import {
 } from '@/components/ui/select'
 
 import { Search } from 'lucide-react'
-import { featuredArticles, recentArticles, eventArticles } from './blocks-data'
-import { categories, mainCategoryLabels } from './categories-data'
-import {
-  FeaturedArticlesHero,
-  PopularArticlesList,
-  RecentArticlesGrid,
-  EventArticlesList,
-} from './blocks'
+import { featuredArticles, recentArticles, eventArticles } from './articles.mock'
+import { categories, mainCategoryLabels } from './categories.mock'
+
 import Socials from './socials'
+import { FeaturedArticles, LastFeaturedArticles } from './blocks/featured-articles'
+
+import { NewsArticlesGrid } from './blocks/news-articles'
+import { EventArticlesList } from './blocks/event-articles'
 
 const ArticlesSection = () => {
   const featuredArticle = featuredArticles[0]
@@ -31,7 +30,7 @@ const ArticlesSection = () => {
     <section className="w-full flex justify-center py-16">
       <div className="w-full max-w-5xl space-y-8">
         {/* SECTION HEADER: TITLE AND INTRO TEXT */}
-        <header className="space-y-3 text-center md:text-left">
+        <div className="space-y-3 text-center md:text-left">
           <p className="text-xs sm:text-sm font-medium tracking-[0.2em] text-muted-foreground uppercase">
             Dentro dos artigos mais recentes
           </p>
@@ -42,11 +41,11 @@ const ArticlesSection = () => {
             Artigos jornalísticos com notícias, bastidores da hotelaria, experiências de viagem e
             eventos em Foz do Iguaçu e na tríplice fronteira.
           </p>
-        </header>
+        </div>
 
-        {/* TOP GRID: FEATURED ARTICLE HERO + SEARCH AND POPULAR LIST */}
+        {/* TOP GRID: FEATURED ARTICLE HERO + SEARCH AND FEATURED LIST */}
         <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)] items-start">
-          <FeaturedArticlesHero article={featuredArticle} />
+          <LastFeaturedArticles article={featuredArticle} />
 
           <div className="space-y-4">
             {/* SEARCH INPUT + FEATURED LABEL AND CTA */}
@@ -72,7 +71,7 @@ const ArticlesSection = () => {
               </div>
             </div>
 
-            <PopularArticlesList articles={popularArticles} />
+            <FeaturedArticles articles={popularArticles} />
           </div>
         </div>
 
@@ -120,11 +119,11 @@ const ArticlesSection = () => {
             </div>
 
             <div className="space-y-3">
-              <h3 className="text-sm md:text-base font-semibold tracking-tight">
+              <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
                 Artigos recentes
-              </h3>
+              </p>
 
-              <RecentArticlesGrid articles={recentArticles} />
+              <NewsArticlesGrid articles={recentArticles} />
             </div>
           </div>
 
@@ -138,9 +137,6 @@ const ArticlesSection = () => {
               <CardContent className="py-5 flex flex-col gap-3">
                 <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
                   Eventos & gastronomia
-                </p>
-                <p className="text-[11px] font-semibold text-muted-foreground">
-                  Próximos destaques em agenda
                 </p>
                 <EventArticlesList articles={eventArticles} />
               </CardContent>

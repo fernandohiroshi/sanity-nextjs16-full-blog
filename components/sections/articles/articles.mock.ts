@@ -1,4 +1,4 @@
-import type { ArticleCard } from './types'
+import type { ArticleCard } from '../../../types/types'
 
 export const featuredArticles: ArticleCard[] = [
   {

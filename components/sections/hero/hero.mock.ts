@@ -1,4 +1,4 @@
-import type { ArticleCard } from '../articles/types'
+import type { ArticleCard } from '../../../types/types'
 
 // HERO ADS TYPE DERIVED FROM SHARED ARTICLECARD (ONLY href AND image USED HERE)
 export type HeroAd = Pick<ArticleCard, 'href' | 'image'>

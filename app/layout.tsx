@@ -3,7 +3,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
-import WhatsAppFloatButton from '@/components/whatsapp-float-button'
+import WhatsAppFloatButton from '@/components/whatsapp-button'
 
 export const metadata: Metadata = {
   title: 'Silvana Canal',

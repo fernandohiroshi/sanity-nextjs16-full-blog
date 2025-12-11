@@ -15,8 +15,8 @@ import {
 } from '@/components/ui/sheet'
 import { Menu } from 'lucide-react'
 
-import { categories } from '@/components/sections/articles/categories-data'
-import { mainLinks, socialLinks } from './side-menu-data'
+import { categories } from '@/components/sections/articles/categories.mock'
+import { mainLinks, socialLinks } from './side-menu.config'
 
 export const SideMenu = () => {
   return (

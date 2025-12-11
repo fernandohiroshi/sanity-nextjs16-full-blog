@@ -5,7 +5,7 @@ import Autoplay from 'embla-carousel-autoplay'
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { adsArticles } from './data'
+import { adsArticles } from './hero.mock'
 import {
   Carousel,
   CarouselContent,
