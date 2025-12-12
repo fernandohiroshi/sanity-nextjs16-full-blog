@@ -5,13 +5,13 @@ import Image from 'next/image'
 const AboutSection = () => {
   return (
     <section id="sobre" className="w-full flex justify-center md:py-14 px-4 sm:px-6 lg:px-0">
-      <div className="w-full max-w-5xl grid gap-8 lg:grid-cols-2 items-center">
-        <div className="relative aspect-3/4 w-full overflow-hidden rounded-2xl bg-neutral-200 dark:bg-neutral-800">
+      <div className="max grid gap-8 lg:grid-cols-2 items-center">
+        <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-neutral-200 dark:bg-neutral-800">
           <Image
             src="https://plus.unsplash.com/premium_photo-1664297951506-135f601fefbb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Silhueta de uma mulher sorrindo, representando Silvana Canal"
             fill
-            className="object-cover"
+            className="object-cover object-top"
             sizes="(min-width: 1024px) 460px, 100vw"
           />
         </div>

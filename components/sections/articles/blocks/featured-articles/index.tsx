@@ -22,7 +22,6 @@ export const LastFeaturedArticles = ({ article }: LastFeaturedArticlesProps) => 
             sizes="(min-width: 1024px) 720px, 100vw"
           />
         </div>
-
         <CardContent className="flex flex-col gap-1.5 py-3.5">
           <div className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground">
             {article.category ? (
@@ -41,7 +40,9 @@ export const LastFeaturedArticles = ({ article }: LastFeaturedArticlesProps) => 
           </h3>
 
           {article.excerpt ? (
-            <p className="text-sm text-muted-foreground leading-relaxed">{article.excerpt}</p>
+            <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+              {article.excerpt}
+            </p>
           ) : null}
         </CardContent>
       </div>

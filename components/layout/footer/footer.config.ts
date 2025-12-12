@@ -13,15 +13,15 @@ export type FooterSocialLink = {
 
 export const mainLinks: FooterLink[] = [
   { href: '#sobre', label: 'Sobre' },
-  { href: '#blog', label: 'Blog' },
+  { href: '/blog', label: 'Blog' },
   { href: '#contato', label: 'Contato' },
 ]
 
 export const categoryLinks: FooterLink[] = [
-  { href: '#turismo', label: 'Turismo' },
-  { href: '#hoteis', label: 'Hotéis' },
-  { href: '#noticias', label: 'Notícias' },
-  { href: '#eventos', label: 'Eventos' },
+  { href: '/blog?category=Turismo', label: 'Turismo' },
+  { href: '/blog?category=Hotelaria', label: 'Hotéis' },
+  { href: '/blog?category=Noticias', label: 'Notícias' },
+  { href: '/blog?category=Evento', label: 'Eventos' },
 ]
 
 export const socialLinks: FooterSocialLink[] = [

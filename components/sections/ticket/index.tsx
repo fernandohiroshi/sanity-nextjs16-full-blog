@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 const TicketSection = () => {
   return (
     <section className="w-full flex justify-center pb-16 px-4 sm:px-0">
-      <div className="relative w-full max-w-5xl overflow-hidden rounded-2xl sm:rounded-3xl bg-black/60">
+      <div className="relative max overflow-hidden rounded-2xl sm:rounded-3xl bg-black/60">
         <div className="relative aspect-16/6 w-full">
           <video
             className="h-full w-full object-cover opacity-80"

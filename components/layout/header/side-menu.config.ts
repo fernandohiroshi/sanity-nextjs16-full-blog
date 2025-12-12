@@ -13,7 +13,7 @@ export type SideMenuSocialLink = {
 
 export const mainLinks: SideMenuLink[] = [
   { href: '#sobre', label: 'Sobre' },
-  { href: '#blog', label: 'Blog' },
+  { href: '/blog', label: 'Blog' },
   { href: '#contato', label: 'Contato' },
 ]
 

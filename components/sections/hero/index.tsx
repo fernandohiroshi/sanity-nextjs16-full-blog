@@ -20,7 +20,7 @@ const HeroSection = () => {
   return (
     // HERO SECTION ROOT WRAPPER
     <section className="w-full flex justify-center">
-      <div className="w-full max-w-5xl space-y-4">
+      <div className="max space-y-4 w-full">
         {/* HERO EYEBROW / TAGLINE TEXT */}
         <div className="px-4 pt-4 sm:px-0 sm:pt-6 text-center">
           <p className="text-[11px] sm:text-xs md:text-sm font-medium tracking-[0.3em] uppercase text-muted-foreground">

@@ -14,9 +14,25 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Menu } from 'lucide-react'
-
-import { categories } from '@/components/sections/articles/categories.mock'
 import { mainLinks, socialLinks } from './side-menu.config'
+
+const categories: { label: string }[] = [
+  { label: 'Noticias' },
+  { label: 'Turismo' },
+  { label: 'Hotelaria' },
+  { label: 'Viagens' },
+  { label: 'Evento' },
+  { label: 'Gastronomia' },
+  { label: 'Historias' },
+  { label: 'Tecnologia' },
+  { label: 'Economia' },
+  { label: 'Life Style' },
+  { label: 'Paraguai' },
+  { label: 'Argentina' },
+  { label: 'Saude' },
+  { label: 'Moda' },
+  { label: 'Acao Social' },
+]
 
 export const SideMenu = () => {
   return (
@@ -63,7 +79,9 @@ export const SideMenu = () => {
                   className="justify-start text-xs"
                   asChild
                 >
-                  <Link href="#blog">{category.label}</Link>
+                  <Link href={`/blog?category=${encodeURIComponent(category.label)}`}>
+                    {category.label}
+                  </Link>
                 </Button>
               ))}
             </div>
