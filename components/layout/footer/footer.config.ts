@@ -12,9 +12,9 @@ export type FooterSocialLink = {
 }
 
 export const mainLinks: FooterLink[] = [
-  { href: '#sobre', label: 'Sobre' },
+  { href: '/#sobre', label: 'Sobre' },
   { href: '/blog', label: 'Blog' },
-  { href: '#contato', label: 'Contato' },
+  { href: '/#contato', label: 'Contato' },
 ]
 
 export const categoryLinks: FooterLink[] = [

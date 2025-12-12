@@ -10,11 +10,12 @@ import { mainLinks, socialLinks, categoryLinks } from './footer.config'
 
 const Footer = () => {
   return (
-    <footer className="mt-10 border-t bg-neutral-100/60 py-10 text-sm dark:bg-neutral-900/60">
+    <footer
+      id="contato"
+      className="mt-10 border-t bg-neutral-100/60 py-10 text-sm dark:bg-neutral-900/60"
+    >
       <div className="max space-y-8">
-        {/* TOP GRID: FOUR COLUMNS LIKE THE REFERENCE DESIGN */}
         <div className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]">
-          {/* CONTACT / COMPANY COLUMN */}
           <div className="space-y-4 max-w-xs">
             <h2 className="text-base font-semibold tracking-tight">Contato</h2>
             <p className="text-xs text-muted-foreground">
@@ -32,7 +33,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* NAVIGATION COLUMN */}
           <div className="space-y-3">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
               Navegação
@@ -46,7 +46,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* CATEGORIES COLUMN (ALL CATEGORIES) */}
           <div className="space-y-3">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
               Categorias
@@ -64,7 +63,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* SOCIAL COLUMN */}
           <div className="space-y-3">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
               Redes sociais
@@ -87,7 +85,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* BOTTOM BAR: COPYRIGHT LIKE REFERENCE FOOTER */}
         <>
           <Separator className="my-2" />
           <div className="flex items-center justify-between gap-4 text-[11px] text-muted-foreground">
@@ -96,12 +93,13 @@ const Footer = () => {
               variant="outline"
               size="icon"
               className="h-8 w-8 rounded-full"
-              asChild
               aria-label="Voltar ao topo"
+              onClick={() =>
+                typeof window !== 'undefined' &&
+                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+              }
             >
-              <Link href="#home">
-                <ArrowUp className="h-4 w-4" />
-              </Link>
+              <ArrowUp className="h-4 w-4" />
             </Button>
           </div>
         </>

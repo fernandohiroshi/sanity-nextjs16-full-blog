@@ -55,23 +55,22 @@ export type FeaturedArticlesProps = {
 }
 
 export const FeaturedArticles = ({ articles }: FeaturedArticlesProps) => (
-  <div className="space-y-3">
+  <div className="space-y-1">
     {articles.map((article) => (
       <Link key={article.title} href={article.href} className="block">
         <Card className="p-0 shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">
-          <CardHeader className="flex flex-row items-center gap-3 py-5">
-            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-md border bg-muted sm:h-20 sm:w-20">
+          <CardHeader className="flex flex-row items-center gap-3 py-3.5">
+            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md border bg-muted sm:h-28 sm:w-28">
               <Image
                 src={article.image}
                 alt={article.title}
                 fill
-                sizes="80px"
+                sizes="112px"
                 className="object-cover transition-transform duration-500 ease-out hover:scale-110"
               />
             </div>
-            <div className="space-y-1">
-              <p className="text-[11px] text-muted-foreground">{article.date}</p>
-              <CardTitle className="text-xs sm:text-sm font-semibold leading-snug line-clamp-3">
+            <div className="space-y-0.5">
+              <CardTitle className="text-[10px] sm:text-[11px] font-medium leading-snug line-clamp-2">
                 {article.title}
               </CardTitle>
             </div>

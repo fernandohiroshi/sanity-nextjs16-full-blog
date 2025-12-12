@@ -16,9 +16,9 @@ export type SideMenuCategory = {
 }
 
 export const mainLinks: SideMenuLink[] = [
-  { href: '#sobre', label: 'Sobre' },
+  { href: '/#sobre', label: 'Sobre' },
   { href: '/blog', label: 'Blog' },
-  { href: '#contato', label: 'Contato' },
+  { href: '/#contato', label: 'Contato' },
 ]
 
 export const socialLinks: SideMenuSocialLink[] = [

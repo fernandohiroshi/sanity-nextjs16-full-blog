@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { getImageUrl } from '@/lib/sanity'
 import { getPostBySlug } from '@/lib/posts'
-import { PostPortableText } from '@/components/posts/PostPortableText'
+import { PostPortableText } from '@/components/posts/post-portable-text'
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

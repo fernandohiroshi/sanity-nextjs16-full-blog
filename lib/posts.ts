@@ -1,4 +1,6 @@
 import groq from 'groq'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 import { sanityFetch, getImageUrl } from './sanity'
 import type { SanityPostBase } from '@/types/sanity'
@@ -45,7 +47,7 @@ export async function getArticlesForCards(): Promise<ArticleCard[]> {
       title: item.title,
       category: item.category,
       href: `/posts/${item.slug!.current!}`,
-      date: item.date,
+      date: item.date ? format(new Date(item.date), 'dd/MM/yyyy', { locale: ptBR }) : '',
       image: getImageUrl(item.image!.asset!._ref, 800, 450),
       excerpt: item.excerpt,
     }))

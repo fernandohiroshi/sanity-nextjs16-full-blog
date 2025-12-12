@@ -58,10 +58,8 @@ export const ArticlesSectionClient = ({
   }
 
   return (
-    // ARTICLES SECTION ROOT WRAPPER
     <section className="w-full flex justify-center py-16">
       <div className="max space-y-8">
-        {/* SECTION HEADER: TITLE AND INTRO TEXT */}
         <div className="space-y-3 text-center md:text-left">
           <p className="text-xs sm:text-sm font-medium tracking-[0.2em] text-muted-foreground uppercase">
             Dentro dos artigos mais recentes
@@ -75,12 +73,10 @@ export const ArticlesSectionClient = ({
           </p>
         </div>
 
-        {/* TOP GRID: FEATURED ARTICLE HERO + SEARCH AND FEATURED LIST */}
         <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)] items-start">
           <LastFeaturedArticles article={lastFeaturedArticle} />
 
           <div className="space-y-4">
-            {/* SEARCH INPUT + FEATURED LABEL AND CTA */}
             <div className="space-y-3">
               <form className="relative" onSubmit={handleSearchSubmit}>
                 <Search className="pointer-events-none absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -114,11 +110,8 @@ export const ArticlesSectionClient = ({
           </div>
         </div>
 
-        {/* SECOND GRID: CATEGORIES, RECENT ARTICLES AND SIDEBAR CARDS */}
         <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(0,1.1fr)] items-start">
-          {/* LEFT COLUMN: CATEGORIES FILTER + RECENT ARTICLES GRID */}
           <div className="space-y-6">
-            {/* CATEGORIES DROPDOWN AND HIGHLIGHTED BUTTONS */}
             <div className="space-y-3">
               <h3 className="text-base md:text-lg font-semibold tracking-tight">
                 Categorias em foco
@@ -171,12 +164,9 @@ export const ArticlesSectionClient = ({
             </div>
           </div>
 
-          {/* RIGHT COLUMN: SOCIALS CARD + UPCOMING EVENTS LIST */}
           <div className="space-y-4">
-            {/* SOCIALS CARD WITH CTA TO FOLLOW ON NETWORKS */}
             <Socials />
 
-            {/* UPCOMING EVENTS / HIGHLIGHTS CARD */}
             <Card className="border-dashed bg-muted/40 shadow-sm transition-colors hover:bg-muted/60 hover:shadow-md">
               <CardContent className="py-5 flex flex-col gap-3">
                 <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
@@ -188,7 +178,6 @@ export const ArticlesSectionClient = ({
           </div>
         </div>
 
-        {/* LOAD MORE BUTTON */}
         <div className="flex justify-center pt-4">
           <Button
             variant="outline"

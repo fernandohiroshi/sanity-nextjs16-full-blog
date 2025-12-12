@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 
-import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -15,6 +14,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Menu } from 'lucide-react'
+import { GiButterfly } from 'react-icons/gi'
 import { mainLinks, socialLinks, sideMenuCategories } from './side-menu.config'
 
 export const SideMenu = () => {
@@ -99,17 +99,17 @@ export const SideMenu = () => {
           </div>
         </div>
 
-        <div className="mt-auto space-y-3 border-t pt-3 sm:pt-4 text-xs">
-          <div className="flex items-center justify-between">
-            <span className="text-muted-foreground">Tema</span>
-            <ThemeToggle />
-          </div>
-
-          <Button onClick={handleNavigate} asChild className="w-full text-xs font-medium">
-            <Link href="http://localhost:3333" target="_blank" rel="noreferrer">
-              Login CMS
+        <div className="mt-auto space-y-3 pt-3 sm:pt-4 text-xs">
+          <div className="flex justify-center">
+            <Link
+              href="http://localhost:3333"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Abrir painel CMS"
+            >
+              <GiButterfly className="h-6 w-6 text-primary" />
             </Link>
-          </Button>
+          </div>
         </div>
       </SheetContent>
     </Sheet>
