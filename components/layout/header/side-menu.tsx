@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 
 import { ThemeToggle } from '@/components/theme-toggle'
@@ -14,29 +15,17 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Menu } from 'lucide-react'
-import { mainLinks, socialLinks } from './side-menu.config'
-
-const categories: { label: string }[] = [
-  { label: 'Noticias' },
-  { label: 'Turismo' },
-  { label: 'Hotelaria' },
-  { label: 'Viagens' },
-  { label: 'Evento' },
-  { label: 'Gastronomia' },
-  { label: 'Historias' },
-  { label: 'Tecnologia' },
-  { label: 'Economia' },
-  { label: 'Life Style' },
-  { label: 'Paraguai' },
-  { label: 'Argentina' },
-  { label: 'Saude' },
-  { label: 'Moda' },
-  { label: 'Acao Social' },
-]
+import { mainLinks, socialLinks, sideMenuCategories } from './side-menu.config'
 
 export const SideMenu = () => {
+  const [open, setOpen] = useState(false)
+
+  const handleNavigate = () => {
+    setOpen(false)
+  }
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="outline" size="icon">
           <Menu className="h-4 w-4" />
@@ -58,6 +47,7 @@ export const SideMenu = () => {
                 variant="ghost"
                 size="sm"
                 className="w-full justify-start"
+                onClick={handleNavigate}
                 asChild
               >
                 <Link href={link.href}>{link.label}</Link>
@@ -71,12 +61,13 @@ export const SideMenu = () => {
               Categorias
             </p>
             <div className="grid grid-cols-2 gap-2">
-              {categories.map((category) => (
+              {sideMenuCategories.map((category) => (
                 <Button
                   key={category.label}
                   variant="ghost"
                   size="sm"
                   className="justify-start text-xs"
+                  onClick={handleNavigate}
                   asChild
                 >
                   <Link href={`/blog?category=${encodeURIComponent(category.label)}`}>
@@ -97,6 +88,7 @@ export const SideMenu = () => {
                 variant="outline"
                 size="icon"
                 className="h-8 w-8 rounded-full"
+                onClick={handleNavigate}
                 asChild
               >
                 <Link href={social.href} aria-label={social.label}>
@@ -107,9 +99,17 @@ export const SideMenu = () => {
           </div>
         </div>
 
-        <div className="mt-auto flex items-center justify-between border-t pt-3 sm:pt-4 text-xs">
-          <span className="text-muted-foreground">Tema</span>
-          <ThemeToggle />
+        <div className="mt-auto space-y-3 border-t pt-3 sm:pt-4 text-xs">
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">Tema</span>
+            <ThemeToggle />
+          </div>
+
+          <Button onClick={handleNavigate} asChild className="w-full text-xs font-medium">
+            <Link href="http://localhost:3333" target="_blank" rel="noreferrer">
+              Login CMS
+            </Link>
+          </Button>
         </div>
       </SheetContent>
     </Sheet>

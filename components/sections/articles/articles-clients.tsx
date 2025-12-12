@@ -23,44 +23,18 @@ import { FeaturedArticles, LastFeaturedArticles } from './blocks/featured-articl
 import { NewsArticlesGrid } from './blocks/news-articles'
 import { EventArticlesList } from './blocks/event-articles'
 import type { ArticleCard } from '@/types/types'
-
-const categories: { label: string }[] = [
-  { label: 'Noticias' },
-  { label: 'Turismo' },
-  { label: 'Hotelaria' },
-  { label: 'Viagens' },
-  { label: 'Evento' },
-  { label: 'Gastronomia' },
-  { label: 'Historias' },
-  { label: 'Tecnologia' },
-  { label: 'Economia' },
-  { label: 'Life Style' },
-  { label: 'Paraguai' },
-  { label: 'Argentina' },
-  { label: 'Saude' },
-  { label: 'Moda' },
-  { label: 'Acao Social' },
-]
-
-const mainCategoryLabels: string[] = [
-  'Noticias',
-  'Turismo',
-  'Hotelaria',
-  'Evento',
-  'Viagens',
-  'Gastronomia',
-]
+import { articleCategories, mainArticleCategoryLabels } from './articles.config'
 
 export type ArticlesSectionClientProps = {
-  featuredArticle: ArticleCard
-  popularArticles: ArticleCard[]
+  lastFeaturedArticle: ArticleCard
+  featuredArticles: ArticleCard[]
   recentArticles: ArticleCard[]
   eventArticles: ArticleCard[]
 }
 
 export const ArticlesSectionClient = ({
-  featuredArticle,
-  popularArticles,
+  lastFeaturedArticle,
+  featuredArticles,
   recentArticles,
   eventArticles,
 }: ArticlesSectionClientProps) => {
@@ -103,7 +77,7 @@ export const ArticlesSectionClient = ({
 
         {/* TOP GRID: FEATURED ARTICLE HERO + SEARCH AND FEATURED LIST */}
         <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)] items-start">
-          <LastFeaturedArticles article={featuredArticle} />
+          <LastFeaturedArticles article={lastFeaturedArticle} />
 
           <div className="space-y-4">
             {/* SEARCH INPUT + FEATURED LABEL AND CTA */}
@@ -136,7 +110,7 @@ export const ArticlesSectionClient = ({
               </div>
             </div>
 
-            <FeaturedArticles articles={popularArticles} />
+            <FeaturedArticles articles={featuredArticles} />
           </div>
         </div>
 
@@ -161,8 +135,8 @@ export const ArticlesSectionClient = ({
                       <SelectValue placeholder="Outras categorias" />
                     </SelectTrigger>
                     <SelectContent className="max-h-56 overflow-y-auto">
-                      {categories
-                        .filter((category) => !mainCategoryLabels.includes(category.label))
+                      {articleCategories
+                        .filter((category) => !mainArticleCategoryLabels.includes(category.label))
                         .map((category) => (
                           <SelectItem key={category.label} value={category.label}>
                             {category.label}
@@ -173,7 +147,7 @@ export const ArticlesSectionClient = ({
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2">
-                  {mainCategoryLabels.map((label) => (
+                  {mainArticleCategoryLabels.map((label) => (
                     <Button
                       key={label}
                       variant="outline"

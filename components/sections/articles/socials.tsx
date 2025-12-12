@@ -2,6 +2,19 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { FaInstagram, FaLinkedinIn, FaXTwitter, FaFacebookF } from 'react-icons/fa6'
 
+type SocialLink = {
+  href: string
+  label: string
+  Icon: typeof FaInstagram
+}
+
+const socialLinks: SocialLink[] = [
+  { href: '#', label: 'Instagram', Icon: FaInstagram },
+  { href: '#', label: 'LinkedIn', Icon: FaLinkedinIn },
+  { href: '#', label: 'X (Twitter)', Icon: FaXTwitter },
+  { href: '#', label: 'Facebook', Icon: FaFacebookF },
+]
+
 const Socials = () => {
   return (
     <Card>
@@ -16,26 +29,19 @@ const Socials = () => {
         <div className="flex flex-col gap-2">
           <p className="text-xs text-muted-foreground">Ou acompanhe pelas redes sociais:</p>
           <div className="flex flex-wrap items-center gap-2">
-            <Button variant="outline" size="icon" className="h-8 w-8 rounded-full" asChild>
-              <a href="#" aria-label="Instagram">
-                <FaInstagram className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button variant="outline" size="icon" className="h-8 w-8 rounded-full" asChild>
-              <a href="#" aria-label="LinkedIn">
-                <FaLinkedinIn className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button variant="outline" size="icon" className="h-8 w-8 rounded-full" asChild>
-              <a href="#" aria-label="X (Twitter)">
-                <FaXTwitter className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button variant="outline" size="icon" className="h-8 w-8 rounded-full" asChild>
-              <a href="#" aria-label="Facebook">
-                <FaFacebookF className="h-4 w-4" />
-              </a>
-            </Button>
+            {socialLinks.map(({ href, label, Icon }) => (
+              <Button
+                key={label}
+                variant="outline"
+                size="icon"
+                className="h-8 w-8 rounded-full"
+                asChild
+              >
+                <a href={href} aria-label={label}>
+                  <Icon className="h-4 w-4" />
+                </a>
+              </Button>
+            ))}
           </div>
         </div>
       </CardContent>

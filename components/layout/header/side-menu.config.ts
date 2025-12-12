@@ -11,6 +11,10 @@ export type SideMenuSocialLink = {
   icon: typeof Instagram
 }
 
+export type SideMenuCategory = {
+  label: string
+}
+
 export const mainLinks: SideMenuLink[] = [
   { href: '#sobre', label: 'Sobre' },
   { href: '/blog', label: 'Blog' },
@@ -22,4 +26,22 @@ export const socialLinks: SideMenuSocialLink[] = [
   { href: '#', label: 'LinkedIn', icon: Linkedin },
   { href: '#', label: 'X (Twitter)', icon: Twitter },
   { href: '#', label: 'Facebook', icon: Facebook },
+]
+
+export const sideMenuCategories: SideMenuCategory[] = [
+  { label: 'Noticias' },
+  { label: 'Turismo' },
+  { label: 'Hotelaria' },
+  { label: 'Viagens' },
+  { label: 'Evento' },
+  { label: 'Gastronomia' },
+  { label: 'Historias' },
+  { label: 'Tecnologia' },
+  { label: 'Economia' },
+  { label: 'Life Style' },
+  { label: 'Paraguai' },
+  { label: 'Argentina' },
+  { label: 'Saude' },
+  { label: 'Moda' },
+  { label: 'Acao Social' },
 ]

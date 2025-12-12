@@ -1,4 +1,5 @@
 import { createClient, type QueryParams } from '@sanity/client'
+import { createImageUrlBuilder } from '@sanity/image-url'
 
 const projectId = process.env.SANITY_PROJECT_ID!
 const dataset = process.env.SANITY_DATASET!
@@ -13,6 +14,13 @@ export const sanityClient = createClient({
   useCdn,
   token,
 })
+
+const imageBuilder = createImageUrlBuilder({ projectId, dataset })
+
+export const urlForImage = (source: unknown) => imageBuilder.image(source as never)
+
+export const getImageUrl = (source: unknown, width: number, height: number) =>
+  urlForImage(source).width(width).height(height).url()
 
 export async function sanityFetch<T>(query: string, params: QueryParams = {}): Promise<T> {
   return sanityClient.fetch<T>(query, params)

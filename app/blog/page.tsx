@@ -1,36 +1,13 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import groq from 'groq'
 
 import type { ArticleCard } from '@/types/types'
-import { sanityFetch } from '@/lib/sanity'
+import { getArticlesForCards } from '@/lib/posts'
 import { NewsArticlesGrid } from '@/components/sections/articles/blocks/news-articles'
 
 export const metadata: Metadata = {
   title: 'Blog | Silvana Canal',
 }
-
-type SanityArticle = {
-  _id: string
-  title: string
-  slug?: {
-    current?: string
-  }
-  date: string
-  category?: string
-  imageUrl?: string
-  excerpt?: string
-}
-
-const BLOG_ARTICLES_QUERY = groq`*[_type == "post"] | order(date desc) {
-  _id,
-  title,
-  slug,
-  date,
-  category,
-  "imageUrl": image.asset->url,
-  "excerpt": pt::text(excerpt[0])[0..200]
-}`
 
 type BlogSearchParams = {
   q?: string
@@ -38,19 +15,7 @@ type BlogSearchParams = {
 }
 
 async function getAllArticles(): Promise<ArticleCard[]> {
-  const data = await sanityFetch<SanityArticle[]>(BLOG_ARTICLES_QUERY)
-
-  const articles: ArticleCard[] = data
-    .filter((item) => item.slug?.current && item.imageUrl)
-    .map((item) => ({
-      title: item.title,
-      category: item.category,
-      href: `/posts/${item.slug!.current!}`,
-      date: item.date,
-      image: item.imageUrl!,
-      excerpt: item.excerpt,
-    }))
-
+  const articles = await getArticlesForCards()
   return articles
 }
 
