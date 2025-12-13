@@ -3,8 +3,10 @@
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -18,26 +20,14 @@ import {
 import { Search } from 'lucide-react'
 
 import Socials from './socials'
-import { FeaturedArticles, LastFeaturedArticles } from './blocks/featured-articles'
-
-import { NewsArticlesGrid } from './blocks/news-articles'
-import { EventArticlesList } from './blocks/event-articles'
 import type { ArticleCard } from '@/types/types'
 import { articleCategories, mainArticleCategoryLabels } from './articles.config'
 
 export type ArticlesSectionClientProps = {
-  lastFeaturedArticle: ArticleCard
-  featuredArticles: ArticleCard[]
-  recentArticles: ArticleCard[]
-  eventArticles: ArticleCard[]
+  articles: ArticleCard[]
 }
 
-export const ArticlesSectionClient = ({
-  lastFeaturedArticle,
-  featuredArticles,
-  recentArticles,
-  eventArticles,
-}: ArticlesSectionClientProps) => {
+export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) => {
   const router = useRouter()
   const [searchText, setSearchText] = useState('')
 
@@ -74,7 +64,45 @@ export const ArticlesSectionClient = ({
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)] items-start">
-          <LastFeaturedArticles article={lastFeaturedArticle} />
+          {/* O CARD QUE MOSTRA O ULTIMO POST AQUI [0] */}
+          <Link href={articles[0].href} className="block h-full" aria-label={articles[0].title}>
+            <Card className="h-full overflow-hidden p-0 shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">
+              <div className="grid h-full gap-0 md:grid-rows-[auto_minmax(0,1fr)]">
+                <div className="relative aspect-16/8 w-full overflow-hidden">
+                  <Image
+                    src={articles[0].image}
+                    alt={articles[0].title}
+                    fill
+                    className="object-cover transition-transform duration-500 ease-out hover:scale-105"
+                    sizes="(min-width: 1024px) 720px, 100vw"
+                  />
+                </div>
+                <CardContent className="flex flex-col gap-1.5 py-3.5">
+                  <div className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                    {articles[0].category ? (
+                      <Badge
+                        variant="outline"
+                        className="rounded-full bg-muted px-2 py-[2px] text-[10px] uppercase tracking-wide border-0 leading-none"
+                      >
+                        {articles[0].category}
+                      </Badge>
+                    ) : null}
+                    <span>{articles[0].date}</span>
+                  </div>
+
+                  <h3 className="text-lg md:text-xl font-semibold leading-snug line-clamp-3">
+                    {articles[0].title}
+                  </h3>
+
+                  {articles[0].excerpt ? (
+                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 md:line-clamp-3">
+                      {articles[0].excerpt}
+                    </p>
+                  ) : null}
+                </CardContent>
+              </div>
+            </Card>
+          </Link>
 
           <div className="space-y-4">
             <div className="space-y-3">
@@ -105,8 +133,36 @@ export const ArticlesSectionClient = ({
                 </Button>
               </div>
             </div>
-
-            <FeaturedArticles articles={featuredArticles} />
+            {/* O CARD QUE MOSTRA O ULTIMO POST AQUI[1,2,3] */}
+            <div className="space-y-1">
+              {articles.slice(1, 4).map((article) => (
+                <Link key={article.title} href={article.href} className="block">
+                  <Card className="p-0 shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">
+                    <CardHeader className="flex flex-row items-center gap-3 py-3.5 px-2">
+                      <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md border bg-muted sm:h-24 sm:w-36">
+                        <Image
+                          src={article.image}
+                          alt={article.title}
+                          fill
+                          sizes="112px"
+                          className="object-cover transition-transform duration-500 ease-out hover:scale-110"
+                        />
+                      </div>
+                      <div className="space-y-0.5">
+                        <CardTitle className="text-[10px] sm:text-sm font-medium leading-snug line-clamp-2">
+                          {article.title}
+                        </CardTitle>
+                        {article.excerpt ? (
+                          <p className="text-[11px] text-muted-foreground leading-snug line-clamp-2 md:line-clamp-3">
+                            {article.excerpt}
+                          </p>
+                        ) : null}
+                      </div>
+                    </CardHeader>
+                  </Card>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -159,8 +215,45 @@ export const ArticlesSectionClient = ({
               <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
                 Artigos recentes
               </p>
-
-              <NewsArticlesGrid articles={recentArticles} />
+              {/* O CARD QUE MOSTRA O ULTIMO POST AQUI[4,5,6,7,8,9,10,11] */}
+              <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-2">
+                {articles.slice(4, 12).map((article) => (
+                  <Link key={article.title} href={article.href} className="block h-full">
+                    <Card className="overflow-hidden p-0 flex h-full flex-col shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">
+                      <div className="relative aspect-16/10 w-full overflow-hidden">
+                        <Image
+                          src={article.image}
+                          alt={article.title}
+                          fill
+                          className="object-cover transition-transform duration-500 ease-out hover:scale-105"
+                          sizes="(min-width: 1024px) 420px, 100vw"
+                        />
+                      </div>
+                      <CardContent className="flex flex-1 flex-col gap-1 pt-1.5 pb-3">
+                        <div className="inline-flex items-center gap-1.5 text-[9px] font-medium text-muted-foreground uppercase tracking-wide">
+                          {article.category ? (
+                            <Badge
+                              variant="outline"
+                              className="rounded-full bg-muted px-1.5 py-px text-[9px] border-0 leading-none"
+                            >
+                              {article.category}
+                            </Badge>
+                          ) : null}
+                        </div>
+                        <h4 className="text-xs sm:text-sm font-semibold leading-snug line-clamp-2">
+                          {article.title}
+                        </h4>
+                        {article.excerpt ? (
+                          <p className="text-[11px] text-muted-foreground leading-snug line-clamp-2">
+                            {article.excerpt}
+                          </p>
+                        ) : null}
+                        <p className="text-[11px] text-muted-foreground">{article.date}</p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -172,7 +265,31 @@ export const ArticlesSectionClient = ({
                 <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
                   Eventos & gastronomia
                 </p>
-                <EventArticlesList articles={eventArticles} />
+                {/* O CARD QUE MOSTRA O ULTIMO POST AQUI[12,13,14,15,16,17] */}
+                <div className="space-y-2 pt-1.5">
+                  {articles.slice(12, 16).map((article) => (
+                    <Link key={article.title} href={article.href} className="block">
+                      <Card className="p-0 shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">
+                        <CardHeader className="flex flex-row items-center gap-3 py-3.5 px-2">
+                          <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md border bg-muted sm:h-24 sm:w-36">
+                            <Image
+                              src={article.image}
+                              alt={article.title}
+                              fill
+                              sizes="112px"
+                              className="object-cover transition-transform duration-500 ease-out hover:scale-110"
+                            />
+                          </div>
+                          <div className="space-y-0.5">
+                            <CardTitle className="text-sm font-medium leading-snug line-clamp-4">
+                              {article.title}
+                            </CardTitle>
+                          </div>
+                        </CardHeader>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           </div>

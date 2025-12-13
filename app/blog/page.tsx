@@ -1,9 +1,31 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
+import Image from 'next/image'
+import { Search } from 'lucide-react'
 
 import type { ArticleCard } from '@/types/types'
 import { getArticlesForCards } from '@/lib/posts'
-import { NewsArticlesGrid } from '@/components/sections/articles/blocks/news-articles'
+import {
+  buildBlogPageHref,
+  filterArticlesBySearchAndCategory,
+  getBlogCategoryNames,
+  normalizeBlogSearch,
+  paginateArticles,
+} from '@/lib/blog'
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { BlogCategorySelect } from '@/components/sections/articles/blog-category-select'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
 
 export const metadata: Metadata = {
   title: 'Blog | Silvana Canal',
@@ -12,6 +34,7 @@ export const metadata: Metadata = {
 type BlogSearchParams = {
   q?: string
   category?: string
+  page?: string
 }
 
 async function getAllArticles(): Promise<ArticleCard[]> {
@@ -24,7 +47,7 @@ export default async function BlogPage({
 }: {
   searchParams: Promise<BlogSearchParams>
 }) {
-  const { q, category } = await searchParams
+  const { q, category, page } = await searchParams
 
   const allArticles = await getAllArticles()
 
@@ -32,39 +55,146 @@ export default async function BlogPage({
     notFound()
   }
 
-  const search = (q ?? '').trim().toLowerCase()
-  const categoryFilter = (category ?? '').trim()
-
-  const filtered = allArticles.filter((article) => {
-    const matchesCategory = categoryFilter ? article.category === categoryFilter : true
-
-    const matchesSearch = search
-      ? article.title.toLowerCase().includes(search) ||
-        (article.excerpt ?? '').toLowerCase().includes(search)
-      : true
-
-    return matchesCategory && matchesSearch
+  const {
+    search,
+    categoryFilter,
+    page: normalizedPage,
+  } = normalizeBlogSearch({
+    q,
+    category,
+    page,
   })
 
+  const filtered = filterArticlesBySearchAndCategory(allArticles, search, categoryFilter)
+
+  const {
+    paginated: paginatedArticles,
+    totalPages,
+    currentPage,
+  } = paginateArticles(filtered, normalizedPage, 9)
+
+  const categoryNames = getBlogCategoryNames(allArticles)
+
   return (
-    <main className="max py-10 space-y-6">
-      <header className="space-y-2">
-        <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">Blog</p>
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
-          Todos os artigos
-        </h1>
-        {categoryFilter ? (
-          <p className="text-sm text-muted-foreground">
-            Filtrando pela categoria <span className="font-semibold">{categoryFilter}</span>
+    <main className="max py-12 space-y-10">
+      <header className="space-y-4">
+        <div className="space-y-3 text-center md:text-left">
+          <p className="text-xs font-medium tracking-[0.25em] text-muted-foreground uppercase">
+            Blog
           </p>
-        ) : null}
-        {search ? (
-          <p className="text-xs text-muted-foreground">Resultados para &quot;{q}&quot;</p>
-        ) : null}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight">
+            Todas as categorias
+          </h1>
+          {categoryFilter ? (
+            <p className="text-sm text-muted-foreground">
+              Filtrando pela categoria <span className="font-semibold">{categoryFilter}</span>
+            </p>
+          ) : null}
+          {search ? (
+            <p className="text-xs text-muted-foreground">Resultados para &quot;{q}&quot;</p>
+          ) : null}
+        </div>
+
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          {/* Filtro por categoria - client-side, aplica imediatamente */}
+          <BlogCategorySelect categoryNames={categoryNames} currentCategory={categoryFilter} />
+
+          {/* Busca por texto - formulário separado */}
+          <form className="w-full max-w-md md:ml-auto" action="/blog" method="get">
+            <div className="flex h-9 items-center rounded-md border bg-background px-2">
+              <Input
+                type="search"
+                name="q"
+                defaultValue={q ?? ''}
+                placeholder="Buscar artigos..."
+                className="h-7 flex-1 border-0 bg-transparent p-0 text-xs sm:text-sm shadow-none focus-visible:ring-0 focus-visible:outline-none"
+              />
+              <Button
+                type="submit"
+                size="icon"
+                variant="ghost"
+                className="ml-1 h-7 w-7 shrink-0 text-muted-foreground hover:text-foreground"
+              >
+                <Search className="h-4 w-4" />
+                <span className="sr-only">Buscar</span>
+              </Button>
+            </div>
+          </form>
+        </div>
       </header>
 
       {filtered.length ? (
-        <NewsArticlesGrid articles={filtered} />
+        <section className="space-y-6">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {paginatedArticles.map((article) => (
+              <Link key={article.title} href={article.href} className="block h-full">
+                <Card className="overflow-hidden p-0 flex h-full flex-col shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">
+                  <div className="relative aspect-16/10 w-full overflow-hidden">
+                    <Image
+                      src={article.image}
+                      alt={article.title}
+                      fill
+                      className="object-cover transition-transform duration-500 ease-out hover:scale-105"
+                      sizes="(min-width: 1024px) 420px, 100vw"
+                    />
+                  </div>
+                  <CardContent className="flex flex-1 flex-col gap-1 pt-2 pb-3">
+                    <div className="inline-flex items-center gap-1.5 text-[9px] font-medium text-muted-foreground uppercase tracking-wide">
+                      <span>{article.date}</span>
+                      {article.category ? (
+                        <Badge
+                          variant="outline"
+                          className="rounded-full bg-muted px-1.5 py-px text-[9px] border-0 leading-none"
+                        >
+                          {article.category}
+                        </Badge>
+                      ) : null}
+                    </div>
+                    <h3 className="text-sm sm:text-base font-semibold leading-snug line-clamp-2">
+                      {article.title}
+                    </h3>
+                    {article.excerpt ? (
+                      <p className="text-xs sm:text-sm text-muted-foreground leading-snug line-clamp-2">
+                        {article.excerpt}
+                      </p>
+                    ) : null}
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+
+          {totalPages > 1 ? (
+            <Pagination className="pt-2">
+              <PaginationContent>
+                {currentPage > 1 && (
+                  <PaginationItem>
+                    <PaginationPrevious
+                      href={buildBlogPageHref({ q, category }, currentPage - 1)}
+                    />
+                  </PaginationItem>
+                )}
+
+                {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+                  <PaginationItem key={pageNumber}>
+                    <PaginationLink
+                      href={buildBlogPageHref({ q, category }, pageNumber)}
+                      isActive={pageNumber === currentPage}
+                    >
+                      {pageNumber}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+
+                {currentPage < totalPages && (
+                  <PaginationItem>
+                    <PaginationNext href={buildBlogPageHref({ q, category }, currentPage + 1)} />
+                  </PaginationItem>
+                )}
+              </PaginationContent>
+            </Pagination>
+          ) : null}
+        </section>
       ) : (
         <p className="text-sm text-muted-foreground">Nenhum artigo encontrado.</p>
       )}

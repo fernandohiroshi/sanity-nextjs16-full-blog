@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {articleCategories} from '../../components/sections/articles/articles.config'
 
 export const articleType = defineType({
   name: 'post',
@@ -71,23 +72,10 @@ export const articleType = defineType({
       title: 'Categoria',
       type: 'string',
       options: {
-        list: [
-          {title: 'Noticias', value: 'Noticias'},
-          {title: 'Turismo', value: 'Turismo'},
-          {title: 'Hotelaria', value: 'Hotelaria'},
-          {title: 'Viagens', value: 'Viagens'},
-          {title: 'Evento', value: 'Evento'},
-          {title: 'Gastronomia', value: 'Gastronomia'},
-          {title: 'Historias', value: 'Historias'},
-          {title: 'Tecnologia', value: 'Tecnologia'},
-          {title: 'Economia', value: 'Economia'},
-          {title: 'Life Style', value: 'Life Style'},
-          {title: 'Paraguai', value: 'Paraguai'},
-          {title: 'Argentina', value: 'Argentina'},
-          {title: 'Saude', value: 'Saude'},
-          {title: 'Moda', value: 'Moda'},
-          {title: 'Acao Social', value: 'Acao Social'},
-        ],
+        list: articleCategories.map((category) => ({
+          title: category.label,
+          value: category.label,
+        })),
       },
     }),
   ],
