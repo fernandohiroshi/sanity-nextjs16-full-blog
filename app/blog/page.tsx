@@ -1,23 +1,17 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { Search } from 'lucide-react'
 
-import type { ArticleCard } from '@/types/types'
-import { getArticlesForCards } from '@/lib/posts'
-import {
-  buildBlogPageHref,
-  filterArticlesBySearchAndCategory,
-  getBlogCategoryNames,
-  normalizeBlogSearch,
-  paginateArticles,
-} from '@/lib/blog'
+import { buildBlogPageHref } from '@/lib/blog'
+import type { BlogSearchParams } from '@/lib/blog'
+import { getBlogPageData } from './data'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { BlogCategorySelect } from '@/components/sections/articles/blog-category-select'
+import { BlogCategorySelect } from '@/components/blog-category-select'
 import {
   Pagination,
   PaginationContent,
@@ -31,49 +25,15 @@ export const metadata: Metadata = {
   title: 'Blog | Silvana Canal',
 }
 
-type BlogSearchParams = {
-  q?: string
-  category?: string
-  page?: string
-}
-
-async function getAllArticles(): Promise<ArticleCard[]> {
-  const articles = await getArticlesForCards()
-  return articles
-}
-
 export default async function BlogPage({
   searchParams,
 }: {
   searchParams: Promise<BlogSearchParams>
 }) {
-  const { q, category, page } = await searchParams
+  const params = await searchParams
 
-  const allArticles = await getAllArticles()
-
-  if (!allArticles.length) {
-    notFound()
-  }
-
-  const {
-    search,
-    categoryFilter,
-    page: normalizedPage,
-  } = normalizeBlogSearch({
-    q,
-    category,
-    page,
-  })
-
-  const filtered = filterArticlesBySearchAndCategory(allArticles, search, categoryFilter)
-
-  const {
-    paginated: paginatedArticles,
-    totalPages,
-    currentPage,
-  } = paginateArticles(filtered, normalizedPage, 9)
-
-  const categoryNames = getBlogCategoryNames(allArticles)
+  const { paginatedArticles, totalPages, currentPage, categoryNames, search, categoryFilter } =
+    await getBlogPageData(params, 9)
 
   return (
     <main className="max py-12 space-y-10">
@@ -91,21 +51,19 @@ export default async function BlogPage({
             </p>
           ) : null}
           {search ? (
-            <p className="text-xs text-muted-foreground">Resultados para &quot;{q}&quot;</p>
+            <p className="text-xs text-muted-foreground">Resultados para &quot;{params.q}&quot;</p>
           ) : null}
         </div>
 
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          {/* Filtro por categoria - client-side, aplica imediatamente */}
           <BlogCategorySelect categoryNames={categoryNames} currentCategory={categoryFilter} />
 
-          {/* Busca por texto - formulário separado */}
           <form className="w-full max-w-md md:ml-auto" action="/blog" method="get">
             <div className="flex h-9 items-center rounded-md border bg-background px-2">
               <Input
                 type="search"
                 name="q"
-                defaultValue={q ?? ''}
+                defaultValue={params.q ?? ''}
                 placeholder="Buscar artigos..."
                 className="h-7 flex-1 border-0 bg-transparent p-0 text-xs sm:text-sm shadow-none focus-visible:ring-0 focus-visible:outline-none"
               />
@@ -123,7 +81,7 @@ export default async function BlogPage({
         </div>
       </header>
 
-      {filtered.length ? (
+      {paginatedArticles.length ? (
         <section className="space-y-6">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {paginatedArticles.map((article) => (
@@ -170,7 +128,10 @@ export default async function BlogPage({
                 {currentPage > 1 && (
                   <PaginationItem>
                     <PaginationPrevious
-                      href={buildBlogPageHref({ q, category }, currentPage - 1)}
+                      href={buildBlogPageHref(
+                        { q: params.q, category: params.category },
+                        currentPage - 1,
+                      )}
                     />
                   </PaginationItem>
                 )}
@@ -178,7 +139,10 @@ export default async function BlogPage({
                 {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
                   <PaginationItem key={pageNumber}>
                     <PaginationLink
-                      href={buildBlogPageHref({ q, category }, pageNumber)}
+                      href={buildBlogPageHref(
+                        { q: params.q, category: params.category },
+                        pageNumber,
+                      )}
                       isActive={pageNumber === currentPage}
                     >
                       {pageNumber}
@@ -188,7 +152,12 @@ export default async function BlogPage({
 
                 {currentPage < totalPages && (
                   <PaginationItem>
-                    <PaginationNext href={buildBlogPageHref({ q, category }, currentPage + 1)} />
+                    <PaginationNext
+                      href={buildBlogPageHref(
+                        { q: params.q, category: params.category },
+                        currentPage + 1,
+                      )}
+                    />
                   </PaginationItem>
                 )}
               </PaginationContent>

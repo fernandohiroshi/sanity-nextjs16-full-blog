@@ -1,12 +1,12 @@
 import type { ArticleCard } from '@/types/types'
 
-export type BlogSearchParamsResolved = {
+export type BlogSearchParams = {
   q?: string
   category?: string
   page?: string
 }
 
-export function normalizeBlogSearch(params: BlogSearchParamsResolved) {
+export function normalizeBlogSearch(params: BlogSearchParams) {
   const search = (params.q ?? '').trim().toLowerCase()
   const categoryFilter = (params.category ?? '').trim()
   const pageParam = params.page ?? '1'

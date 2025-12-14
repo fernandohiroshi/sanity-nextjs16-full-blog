@@ -43,7 +43,7 @@ export async function getHeroAds(): Promise<HeroAd[]> {
     if (hero.kind === 'article' && hero.post?.slug?.current && hero.post.image) {
       ads.push({
         kind: 'post',
-        href: `/posts/${hero.post.slug.current}`,
+        href: `/${hero.post.slug.current}`,
         image: getImageUrl(hero.post.image, 1400, 600),
       })
     }

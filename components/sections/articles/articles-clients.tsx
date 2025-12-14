@@ -23,7 +23,7 @@ import Socials from './socials'
 import type { ArticleCard } from '@/types/types'
 import { articleCategories, mainArticleCategoryLabels } from './articles.config'
 
-export type ArticlesSectionClientProps = {
+type ArticlesSectionClientProps = {
   articles: ArticleCard[]
 }
 
@@ -50,21 +50,19 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
   return (
     <section className="w-full flex justify-center py-16">
       <div className="max space-y-8">
-        <div className="space-y-3 text-center md:text-left">
+        <div>
           <p className="text-xs sm:text-sm font-medium tracking-[0.2em] text-muted-foreground uppercase">
-            Dentro dos artigos mais recentes
+            Entre os artigos mais recentes
           </p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight">
             Turismo, notícias e bastidores da tríplice fronteira
           </h2>
           <p className="max-w-2xl mx-auto md:mx-0 text-muted-foreground text-xs sm:text-sm md:text-base">
-            Artigos jornalísticos com notícias, bastidores da hotelaria, experiências de viagem e
-            eventos em Foz do Iguaçu e na tríplice fronteira.
+            Notícias, bastidores da hotelaria, experiências de viagem e eventos em Foz do Iguaçu e
+            na tríplice fronteira.
           </p>
         </div>
-
         <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)] items-start">
-          {/* O CARD QUE MOSTRA O ULTIMO POST AQUI [0] */}
           <Link href={articles[0].href} className="block h-full" aria-label={articles[0].title}>
             <Card className="h-full overflow-hidden p-0 shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">
               <div className="grid h-full gap-0 md:grid-rows-[auto_minmax(0,1fr)]">
@@ -110,7 +108,7 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
                 <Search className="pointer-events-none absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Buscar textos..."
+                  placeholder="Buscar artigos..."
                   className="h-9 pl-8 text-sm"
                   value={searchText}
                   onChange={(event) => setSearchText(event.target.value)}
@@ -133,7 +131,6 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
                 </Button>
               </div>
             </div>
-            {/* O CARD QUE MOSTRA O ULTIMO POST AQUI[1,2,3] */}
             <div className="space-y-1">
               {articles.slice(1, 4).map((article) => (
                 <Link key={article.title} href={article.href} className="block">
@@ -165,7 +162,6 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
             </div>
           </div>
         </div>
-
         <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(0,1.1fr)] items-start">
           <div className="space-y-6">
             <div className="space-y-3">
@@ -215,7 +211,6 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
               <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
                 Artigos recentes
               </p>
-              {/* O CARD QUE MOSTRA O ULTIMO POST AQUI[4,5,6,7,8,9,10,11] */}
               <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-2">
                 {articles.slice(4, 12).map((article) => (
                   <Link key={article.title} href={article.href} className="block h-full">
@@ -263,9 +258,8 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
             <Card className="border-dashed bg-muted/40 shadow-sm transition-colors hover:bg-muted/60 hover:shadow-md">
               <CardContent className="py-5 flex flex-col gap-3 px-2">
                 <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
-                  Eventos & gastronomia
+                  Mais artigos
                 </p>
-                {/* O CARD QUE MOSTRA O ULTIMO POST AQUI[12,13,14,15,16,17] */}
                 <div className="space-y-2 pt-1.5">
                   {articles.slice(12, 16).map((article) => (
                     <Link key={article.title} href={article.href} className="block">
@@ -294,13 +288,13 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
             </Card>
           </div>
         </div>
-
         <div className="flex justify-center pt-4">
           <Button
             variant="outline"
             className="rounded-full px-6 py-2 text-sm font-medium hover:bg-muted"
+            asChild
           >
-            Ver mais
+            <Link href="/blog">Ver mais</Link>
           </Button>
         </div>
       </div>

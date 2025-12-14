@@ -1,5 +1,5 @@
 import { getHeroAds } from '@/lib/hero'
-import { HeroSectionClient } from './hero-client'
+import { HeroCarousel } from './hero-carousel'
 
 const HeroSection = async () => {
   const ads = await getHeroAds()
@@ -8,7 +8,7 @@ const HeroSection = async () => {
     return null
   }
 
-  return <HeroSectionClient ads={ads} />
+  return <HeroCarousel ads={ads} />
 }
 
 export default HeroSection

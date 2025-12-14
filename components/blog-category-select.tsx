@@ -1,15 +1,19 @@
 'use client'
 
-import { useSearchParams, useRouter } from 'next/navigation'
+import * as React from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 
-export type BlogCategoryFilterProps = {
+export type BlogCategorySelectProps = {
   categoryNames: string[]
   currentCategory: string
 }
 
-export const BlogCategoryFilter = ({ categoryNames, currentCategory }: BlogCategoryFilterProps) => {
+export const BlogCategorySelect: React.FC<BlogCategorySelectProps> = ({
+  categoryNames,
+  currentCategory,
+}) => {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -24,8 +28,8 @@ export const BlogCategoryFilter = ({ categoryNames, currentCategory }: BlogCateg
 
     params.delete('page')
 
-    const queryString = params.toString()
-    router.push(queryString ? `/blog?${queryString}` : '/blog')
+    const qs = params.toString()
+    router.push(qs ? `/blog?${qs}` : '/blog')
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -33,7 +37,14 @@ export const BlogCategoryFilter = ({ categoryNames, currentCategory }: BlogCateg
   }
 
   const handleClear = () => {
-    applyCategory('')
+    const params = new URLSearchParams(searchParams.toString())
+
+    params.delete('category')
+    params.delete('q')
+    params.delete('page')
+
+    const qs = params.toString()
+    router.push(qs ? `/blog?${qs}` : '/blog')
   }
 
   return (

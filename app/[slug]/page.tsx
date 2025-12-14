@@ -1,19 +1,15 @@
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+
 import { getImageUrl } from '@/lib/sanity'
-import { getPostBySlug } from '@/lib/posts'
 import { PostPortableText } from '@/components/post-portable-text'
+import { getPostPageData } from './data'
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
-  if (!slug) notFound()
-
-  const post = await getPostBySlug(slug)
-
-  if (!post) notFound()
+  const post = await getPostPageData(slug)
 
   const formattedDate = post.date
     ? format(new Date(post.date), "d 'de' MMMM 'de' yyyy", { locale: ptBR })

@@ -15,10 +15,12 @@ import {
 } from '@/components/ui/sheet'
 import { Menu } from 'lucide-react'
 import { GiButterfly } from 'react-icons/gi'
-import { mainLinks, socialLinks, sideMenuCategories } from './side-menu.config'
+import { mainLinks, socialLinks, categoryLinks } from '@/components/layout/layout-links.config'
 
 export const SideMenu = () => {
   const [open, setOpen] = useState(false)
+
+  const sideMenuCategories = categoryLinks.map((category) => ({ label: category.label }))
 
   const handleNavigate = () => {
     setOpen(false)

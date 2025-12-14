@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { ArrowUp } from 'lucide-react'
 
-import { mainLinks, socialLinks, categoryLinks } from './footer.config'
+import { mainLinks, socialLinks, categoryLinks } from '@/components/layout/layout-links.config'
 
 const Footer = () => {
   return (

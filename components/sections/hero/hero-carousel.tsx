@@ -14,11 +14,11 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 
-export type HeroSectionClientProps = {
+export type HeroCarouselProps = {
   ads: HeroAd[]
 }
 
-export const HeroSectionClient: React.FC<HeroSectionClientProps> = ({ ads }) => {
+export const HeroCarousel: React.FC<HeroCarouselProps> = ({ ads }) => {
   const plugin = React.useRef(Autoplay({ delay: 3000, stopOnInteraction: false }))
 
   if (!ads.length) return null
