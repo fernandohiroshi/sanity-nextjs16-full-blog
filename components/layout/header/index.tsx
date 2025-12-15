@@ -11,7 +11,7 @@ const Header = () => {
     >
       <div className="max flex items-center justify-between">
         <Link
-          href="/#home"
+          href="/#top"
           className="group relative transition-all duration-300 focus-visible:outline-none 
              focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2"
         >

@@ -1,4 +1,5 @@
 import type { ArticleCard } from '@/types/types'
+import { articleCategories } from '@/components/sections/articles/articles.config'
 
 export type BlogSearchParams = {
   q?: string
@@ -55,10 +56,8 @@ export function paginateArticles(
   }
 }
 
-export function getBlogCategoryNames(allArticles: ArticleCard[]): string[] {
-  return Array.from(
-    new Set(allArticles.map((article) => article.category).filter(Boolean)),
-  ) as string[]
+export function getBlogCategoryNames(): string[] {
+  return articleCategories.map((category) => category.label)
 }
 
 export function buildBlogPageHref(

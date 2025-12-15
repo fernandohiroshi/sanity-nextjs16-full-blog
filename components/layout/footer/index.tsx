@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { ArrowUp } from 'lucide-react'
 
-import { mainLinks, socialLinks, categoryLinks } from '@/components/layout/layout-links.config'
+import { mainLinks, socialLinks } from '@/components/layout/layout-links.config'
+import { BlogSearchForm } from '@/components/blog-search-form'
 
 const Footer = () => {
   return (
@@ -48,19 +49,9 @@ const Footer = () => {
 
           <div className="space-y-3">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              Categorias
+              Buscar no blog
             </p>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-xs md:text-sm">
-              {categoryLinks.map((category) => (
-                <Link
-                  key={category.href}
-                  href={category.href}
-                  className="block text-muted-foreground hover:underline"
-                >
-                  {category.label}
-                </Link>
-              ))}
-            </div>
+            <BlogSearchForm className="w-full max-w-xs" />
           </div>
 
           <div className="space-y-3">
@@ -94,12 +85,11 @@ const Footer = () => {
               size="icon"
               className="h-8 w-8 rounded-full"
               aria-label="Voltar ao topo"
-              onClick={() =>
-                typeof window !== 'undefined' &&
-                window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-              }
+              asChild
             >
-              <ArrowUp className="h-4 w-4" />
+              <Link href="/#top">
+                <ArrowUp className="h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </>

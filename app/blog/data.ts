@@ -44,7 +44,7 @@ export async function getBlogPageData(
     currentPage,
   } = paginateArticles(filtered, page, pageSize)
 
-  const categoryNames = getBlogCategoryNames(allArticles)
+  const categoryNames = getBlogCategoryNames()
 
   return {
     paginatedArticles,

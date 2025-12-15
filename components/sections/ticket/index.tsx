@@ -1,13 +1,11 @@
 'use client'
 
-import Link from 'next/link'
-
 import { Button } from '@/components/ui/button'
 
 const TicketSection = () => {
   return (
-    <section className="w-full flex justify-center pb-16 px-4 sm:px-0">
-      <div className="relative max overflow-hidden rounded-2xl sm:rounded-3xl bg-black/60">
+    <section className="w-full pb-16">
+      <div className="relative w-full overflow-hidden rounded-2xl sm:rounded-3xl">
         <div className="relative aspect-16/6 w-full">
           <video
             className="h-full w-full object-cover opacity-80"
@@ -26,8 +24,8 @@ const TicketSection = () => {
             <p className="text-[11px] sm:text-xs font-medium tracking-[0.3em] uppercase text-white/80">
               Foz do Iguaçu • experiências
             </p>
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-snug md:leading-snug text-white">
-              Ingressos para as aventuras em Foz do Iguaçu?
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold leading-snug text-white">
+              Ingressos para as aventuras em <br /> Foz do Iguaçu?
             </h2>
             <div className="flex justify-center pt-1 sm:pt-2">
               <Button
@@ -35,7 +33,9 @@ const TicketSection = () => {
                 size="sm"
                 className="rounded-full px-4 sm:px-6 md:px-8 text-xs sm:text-sm"
               >
-                <Link href="#">Saiba mais</Link>
+                <a target="_blank" href="https://ingressos.parquedasaves.com.br/">
+                  Saiba mais
+                </a>
               </Button>
             </div>
           </div>

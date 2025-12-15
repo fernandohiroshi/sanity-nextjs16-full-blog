@@ -9,13 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/ui/select'
+import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
 
 import { Search } from 'lucide-react'
 
@@ -131,7 +125,7 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
                 </Button>
               </div>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-3">
               {articles.slice(1, 4).map((article) => (
                 <Link key={article.title} href={article.href} className="block">
                   <Card className="p-0 shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">
@@ -171,24 +165,24 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
 
               <div className="flex flex-wrap items-center gap-3">
                 <div className="w-full max-w-xs sm:w-auto">
-                  <Select
-                    onValueChange={(value) => {
+                  <NativeSelect
+                    defaultValue=""
+                    size="sm"
+                    onChange={(event) => {
+                      const value = event.target.value
+                      if (!value) return
                       handleCategoryClick(value)
                     }}
                   >
-                    <SelectTrigger className="h-8 text-sm">
-                      <SelectValue placeholder="Outras categorias" />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-56 overflow-y-auto">
-                      {articleCategories
-                        .filter((category) => !mainArticleCategoryLabels.includes(category.label))
-                        .map((category) => (
-                          <SelectItem key={category.label} value={category.label}>
-                            {category.label}
-                          </SelectItem>
-                        ))}
-                    </SelectContent>
-                  </Select>
+                    <NativeSelectOption value="">Outras categorias</NativeSelectOption>
+                    {articleCategories
+                      .filter((category) => !mainArticleCategoryLabels.includes(category.label))
+                      .map((category) => (
+                        <NativeSelectOption key={category.label} value={category.label}>
+                          {category.label}
+                        </NativeSelectOption>
+                      ))}
+                  </NativeSelect>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2">
@@ -256,11 +250,11 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
             <Socials />
 
             <Card className="border-dashed bg-muted/40 shadow-sm transition-colors hover:bg-muted/60 hover:shadow-md">
-              <CardContent className="py-5 flex flex-col gap-3 px-2">
-                <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground">
+              <CardContent className="flex flex-col gap-3 px-2">
+                <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground pl-2">
                   Mais artigos
                 </p>
-                <div className="space-y-2 pt-1.5">
+                <div className="space-y-3 pt-1.5">
                   {articles.slice(12, 16).map((article) => (
                     <Link key={article.title} href={article.href} className="block">
                       <Card className="p-0 shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">

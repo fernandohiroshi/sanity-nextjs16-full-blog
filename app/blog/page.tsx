@@ -2,16 +2,15 @@ import type { Metadata } from 'next'
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Search } from 'lucide-react'
 
 import { buildBlogPageHref } from '@/lib/blog'
 import type { BlogSearchParams } from '@/lib/blog'
 import { getBlogPageData } from './data'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { BlogCategorySelect } from '@/components/blog-category-select'
+import { BlogSearchForm } from '@/components/blog-search-form'
+import HeroSection from '@/components/sections/hero'
 import {
   Pagination,
   PaginationContent,
@@ -36,15 +35,26 @@ export default async function BlogPage({
     await getBlogPageData(params, 9)
 
   return (
-    <main className="max py-12 space-y-10">
+    <main className="max py-4 space-y-10">
+      <HeroSection />
+
       <header className="space-y-4">
         <div className="space-y-3 text-center md:text-left">
-          <p className="text-xs font-medium tracking-[0.25em] text-muted-foreground uppercase">
-            Blog
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight">
+              Blog
+            </h1>
+            {totalPages > 1 ? (
+              <Badge variant="outline" className="text-[11px] font-medium px-2 py-0.5">
+                Página <span className="font-semibold mx-0.5">{currentPage}</span> de {totalPages}
+              </Badge>
+            ) : null}
+          </div>
+
+          <p className="text-sm text-muted-foreground max-w-xl mx-auto md:mx-0">
+            Conteúdos sobre marketing, turismo, eventos, hotelaria, viagens, gastronomia em Foz do
+            Iguaçu e região, e muito mais.
           </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight">
-            Todas as categorias
-          </h1>
           {categoryFilter ? (
             <p className="text-sm text-muted-foreground">
               Filtrando pela categoria <span className="font-semibold">{categoryFilter}</span>
@@ -58,26 +68,7 @@ export default async function BlogPage({
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <BlogCategorySelect categoryNames={categoryNames} currentCategory={categoryFilter} />
 
-          <form className="w-full max-w-md md:ml-auto" action="/blog" method="get">
-            <div className="flex h-9 items-center rounded-md border bg-background px-2">
-              <Input
-                type="search"
-                name="q"
-                defaultValue={params.q ?? ''}
-                placeholder="Buscar artigos..."
-                className="h-7 flex-1 border-0 bg-transparent p-0 text-xs sm:text-sm shadow-none focus-visible:ring-0 focus-visible:outline-none"
-              />
-              <Button
-                type="submit"
-                size="icon"
-                variant="ghost"
-                className="ml-1 h-7 w-7 shrink-0 text-muted-foreground hover:text-foreground"
-              >
-                <Search className="h-4 w-4" />
-                <span className="sr-only">Buscar</span>
-              </Button>
-            </div>
-          </form>
+          <BlogSearchForm className="w-full max-w-md md:ml-auto" defaultValue={params.q ?? ''} />
         </div>
       </header>
 

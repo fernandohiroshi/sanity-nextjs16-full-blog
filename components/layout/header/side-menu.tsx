@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { Input } from '@/components/ui/input'
 import {
   Sheet,
   SheetContent,
@@ -13,14 +14,12 @@ import {
   SheetDescription,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import { Menu } from 'lucide-react'
+import { Menu, Search } from 'lucide-react'
 import { GiButterfly } from 'react-icons/gi'
-import { mainLinks, socialLinks, categoryLinks } from '@/components/layout/layout-links.config'
+import { mainLinks, socialLinks } from '@/components/layout/layout-links.config'
 
 export const SideMenu = () => {
   const [open, setOpen] = useState(false)
-
-  const sideMenuCategories = categoryLinks.map((category) => ({ label: category.label }))
 
   const handleNavigate = () => {
     setOpen(false)
@@ -60,24 +59,27 @@ export const SideMenu = () => {
           <div className="space-y-2.5">
             <Separator className="my-2" />
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              Categorias
+              Buscar no blog
             </p>
-            <div className="grid grid-cols-2 gap-2">
-              {sideMenuCategories.map((category) => (
+            <form className="w-full" action="/blog" method="get" onSubmit={handleNavigate}>
+              <div className="flex h-9 items-center rounded-md border bg-background px-2">
+                <Input
+                  type="search"
+                  name="q"
+                  placeholder="Buscar artigos..."
+                  className="h-7 flex-1 border-0 bg-transparent p-0 text-xs shadow-none focus-visible:ring-0 focus-visible:outline-none"
+                />
                 <Button
-                  key={category.label}
+                  type="submit"
+                  size="icon"
                   variant="ghost"
-                  size="sm"
-                  className="justify-start text-xs"
-                  onClick={handleNavigate}
-                  asChild
+                  className="ml-1 h-7 w-7 shrink-0 text-muted-foreground hover:text-foreground"
                 >
-                  <Link href={`/blog?category=${encodeURIComponent(category.label)}`}>
-                    {category.label}
-                  </Link>
+                  <Search className="h-4 w-4" />
+                  <span className="sr-only">Buscar</span>
                 </Button>
-              ))}
-            </div>
+              </div>
+            </form>
           </div>
         </nav>
 

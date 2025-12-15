@@ -4,21 +4,46 @@ export type ArticleCategory = {
 }
 
 export const articleCategories: ArticleCategory[] = [
-  { label: 'Noticias', isMain: true },
+  { label: 'Notícias', isMain: true },
   { label: 'Turismo', isMain: true },
   { label: 'Hotelaria', isMain: true },
   { label: 'Viagens', isMain: true },
   { label: 'Evento', isMain: true },
   { label: 'Gastronomia', isMain: true },
-  { label: 'Historias' },
-  { label: 'Tecnologia' },
+
+  { label: 'Opinião' },
+  { label: 'Histórias' },
+
+  { label: 'Destinos' },
+  { label: 'Experiências' },
+
+  { label: 'Cultura' },
+  { label: 'Entretenimento' },
+  { label: 'Esporte' },
+
   { label: 'Economia' },
+  { label: 'Negócios' },
+  { label: 'Empreendedorismo' },
+  { label: 'Tecnologia' },
+  { label: 'Inovação' },
+
   { label: 'Life Style' },
-  { label: 'Paraguai' },
-  { label: 'Argentina' },
-  { label: 'Saude' },
   { label: 'Moda' },
-  { label: 'Acao Social' },
+  { label: 'Saúde' },
+  { label: 'Comportamento' },
+
+  { label: 'Sociedade' },
+  { label: 'Ação Social' },
+  { label: 'Sustentabilidade' },
+  { label: 'Natureza' },
+
+  { label: 'Educação' },
+
+  { label: 'Foz do Iguaçu' },
+  { label: 'Brasil' },
+  { label: 'Argentina' },
+  { label: 'Paraguai' },
+  { label: 'Internacional' },
 ]
 
 export const mainArticleCategoryLabels: string[] = articleCategories

@@ -1,4 +1,5 @@
 import { Instagram, Linkedin, Twitter, Facebook } from 'lucide-react'
+import { mainArticleCategoryLabels } from '@/components/sections/articles/articles.config'
 
 export type NavLink = {
   href: string
@@ -12,19 +13,16 @@ export type SocialLink = {
 }
 
 export const mainLinks: NavLink[] = [
+  { href: '/', label: 'Home' },
   { href: '/#sobre', label: 'Sobre' },
   { href: '/blog', label: 'Blog' },
   { href: '/#contato', label: 'Contato' },
 ]
 
-export const categoryLinks: NavLink[] = [
-  { href: '/blog?category=Noticias', label: 'Notícias' },
-  { href: '/blog?category=Turismo', label: 'Turismo' },
-  { href: '/blog?category=Hotelaria', label: 'Hotelaria' },
-  { href: '/blog?category=Viagens', label: 'Viagens' },
-  { href: '/blog?category=Evento', label: 'Evento' },
-  { href: '/blog?category=Gastronomia', label: 'Gastronomia' },
-]
+export const categoryLinks: NavLink[] = mainArticleCategoryLabels.map((label) => ({
+  href: `/blog?category=${encodeURIComponent(label)}`,
+  label,
+}))
 
 export const socialLinks: SocialLink[] = [
   { href: '#', label: 'Instagram', icon: Instagram },
