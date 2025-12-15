@@ -1,19 +1,15 @@
 import { getImageUrl, sanityFetch } from '@/lib/sanity'
 
 export type HeroAd = {
-  kind: 'ad' | 'post'
+  kind: 'ad'
   href: string
   image: string
 }
 
 type HeroDocument = {
-  kind: 'article' | 'ad'
+  kind: 'ad'
   adImage?: unknown
   adUrl?: string
-  post?: {
-    slug?: { current?: string }
-    image?: unknown
-  }
 }
 
 export async function getHeroAds(): Promise<HeroAd[]> {
@@ -21,8 +17,7 @@ export async function getHeroAds(): Promise<HeroAd[]> {
     `*[_type == "hero"]{
       kind,
       adImage,
-      adUrl,
-      post->{slug, image}
+      adUrl
     } | order(_createdAt desc)`,
   )
 
@@ -36,15 +31,6 @@ export async function getHeroAds(): Promise<HeroAd[]> {
         kind: 'ad',
         href: hero.adUrl,
         image: getImageUrl(hero.adImage, 1400, 600),
-      })
-      continue
-    }
-
-    if (hero.kind === 'article' && hero.post?.slug?.current && hero.post.image) {
-      ads.push({
-        kind: 'post',
-        href: `/${hero.post.slug.current}`,
-        image: getImageUrl(hero.post.image, 1400, 600),
       })
     }
   }

@@ -6,15 +6,14 @@ export const articleType = defineType({
   title: 'Postagens',
   type: 'document',
   fields: [
-    // TITLE
     defineField({
       name: 'title',
       title: 'Título',
       type: 'string',
+      description: 'Título principal do artigo, como ele será exibido no site.',
       validation: (Rule) => Rule.required(),
     }),
 
-    // SLUG
     defineField({
       name: 'slug',
       title: 'URL',
@@ -23,23 +22,38 @@ export const articleType = defineType({
         source: 'title',
         maxLength: 96,
       },
+      description:
+        'Endereço amigável do artigo (URL). Normalmente é gerado automaticamente a partir do título.',
       validation: (Rule) => Rule.required(),
       hidden: ({document}) => !document?.title,
     }),
 
-    // IMAGE
     defineField({
       name: 'image',
       title: 'Imagem',
       type: 'image',
-      validation: (Rule) => Rule.required(),
+      description: 'Imagem de destaque do artigo (máximo 1MB). Será usada na capa e nas listagens.',
+      validation: (Rule) =>
+        Rule.required().custom(async (image, context) => {
+          const ref = (image as any)?.asset?._ref
+          if (!ref) return true
+
+          const client = context.getClient({apiVersion: '2023-08-01'})
+          const asset = await client.fetch('*[_id == $id][0]{size}', {id: ref})
+
+          if (!asset?.size) return true
+
+          const maxBytes = 1 * 1024 * 1024 // 1MB
+          return asset.size <= maxBytes || 'A imagem deve ter no máximo 1MB.'
+        }),
     }),
 
-    // EXCERPT
     defineField({
       name: 'excerpt',
       title: 'Conteúdo',
       type: 'array',
+      description:
+        'Conteúdo principal do artigo. Você pode adicionar texto, imagens e vídeos incorporados.',
       of: [
         {type: 'block'},
         {type: 'image', options: {hotspot: true}},
@@ -58,15 +72,14 @@ export const articleType = defineType({
       validation: (Rule) => Rule.required(),
     }),
 
-    // DATE
     defineField({
       name: 'date',
       title: 'Data',
       type: 'datetime',
+      description: 'Data de publicação do artigo. Usada para ordenação e exibição no site.',
       validation: (Rule) => Rule.required(),
     }),
 
-    // CATEGORY
     defineField({
       name: 'category',
       title: 'Categoria',

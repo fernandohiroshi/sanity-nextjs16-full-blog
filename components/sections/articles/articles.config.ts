@@ -9,8 +9,8 @@ export const articleCategories: ArticleCategory[] = [
   { label: 'Hotelaria', isMain: true },
   { label: 'Viagens', isMain: true },
   { label: 'Evento', isMain: true },
-  { label: 'Gastronomia', isMain: true },
 
+  { label: 'Gastronomia' },
   { label: 'Opinião' },
   { label: 'Histórias' },
 

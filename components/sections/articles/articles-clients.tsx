@@ -9,19 +9,23 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
 
 import { Search } from 'lucide-react'
 
 import Socials from './socials'
 import type { ArticleCard } from '@/types/types'
-import { articleCategories, mainArticleCategoryLabels } from './articles.config'
+
+type PartnerCard = {
+  href: string
+  image: string
+}
 
 type ArticlesSectionClientProps = {
   articles: ArticleCard[]
+  partners: PartnerCard[]
 }
 
-export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) => {
+export const ArticlesSectionClient = ({ articles, partners }: ArticlesSectionClientProps) => {
   const router = useRouter()
   const [searchText, setSearchText] = useState('')
 
@@ -33,11 +37,6 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
       return
     }
     const params = new URLSearchParams({ q: query })
-    router.push(`/blog?${params.toString()}`)
-  }
-
-  const handleCategoryClick = (category: string) => {
-    const params = new URLSearchParams({ category })
     router.push(`/blog?${params.toString()}`)
   }
 
@@ -156,51 +155,8 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
             </div>
           </div>
         </div>
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(0,1.1fr)] items-start">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,2.2fr)_minmax(0,1.1fr)] items-stretch">
           <div className="space-y-6">
-            <div className="space-y-3">
-              <h3 className="text-base md:text-lg font-semibold tracking-tight">
-                Categorias em foco
-              </h3>
-
-              <div className="flex flex-wrap items-center gap-3">
-                <div className="w-full max-w-xs sm:w-auto">
-                  <NativeSelect
-                    defaultValue=""
-                    size="sm"
-                    onChange={(event) => {
-                      const value = event.target.value
-                      if (!value) return
-                      handleCategoryClick(value)
-                    }}
-                  >
-                    <NativeSelectOption value="">Outras categorias</NativeSelectOption>
-                    {articleCategories
-                      .filter((category) => !mainArticleCategoryLabels.includes(category.label))
-                      .map((category) => (
-                        <NativeSelectOption key={category.label} value={category.label}>
-                          {category.label}
-                        </NativeSelectOption>
-                      ))}
-                  </NativeSelect>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-2">
-                  {mainArticleCategoryLabels.map((label) => (
-                    <Button
-                      key={label}
-                      variant="outline"
-                      size="sm"
-                      className="rounded-full text-xs font-medium"
-                      onClick={() => handleCategoryClick(label)}
-                    >
-                      {label}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
             <div className="space-y-3">
               <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
                 Artigos recentes
@@ -246,40 +202,38 @@ export const ArticlesSectionClient = ({ articles }: ArticlesSectionClientProps) 
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="flex flex-col space-y-4 h-full">
             <Socials />
 
-            <Card className="border-dashed bg-muted/40 shadow-sm transition-colors hover:bg-muted/60 hover:shadow-md">
-              <CardContent className="flex flex-col gap-3 px-2">
-                <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground pl-2">
-                  Mais artigos
-                </p>
-                <div className="space-y-3 pt-1.5">
-                  {articles.slice(12, 16).map((article) => (
-                    <Link key={article.title} href={article.href} className="block">
-                      <Card className="p-0 shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">
-                        <CardHeader className="flex flex-row items-center gap-3 py-3.5 px-2">
-                          <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md border bg-muted sm:h-24 sm:w-36">
-                            <Image
-                              src={article.image}
-                              alt={article.title}
-                              fill
-                              sizes="112px"
-                              className="object-cover transition-transform duration-500 ease-out hover:scale-110"
-                            />
-                          </div>
-                          <div className="space-y-0.5">
-                            <CardTitle className="text-sm font-medium leading-snug line-clamp-4">
-                              {article.title}
-                            </CardTitle>
-                          </div>
-                        </CardHeader>
-                      </Card>
-                    </Link>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            <div className="flex flex-col gap-3 px-2 mt-8">
+              <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted-foreground pl-2">
+                Parceiros
+              </p>
+              <div className="space-y-2 pt-1">
+                {partners.map((partner, index) => (
+                  <Link
+                    key={`${partner.href}-${index}`}
+                    href={partner.href}
+                    className="block"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <div className="flex justify-start py-1">
+                      <div className="relative h-43 w-full overflow-hidden rounded-lg">
+                        <Image
+                          src={partner.image}
+                          alt="Parceiro"
+                          title="Click para visitar"
+                          fill
+                          sizes="(min-width: 1024px) 320px, 280px"
+                          className="object-cover object-top transition-transform duration-500 ease-out hover:scale-105 rounded-lg"
+                        />
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
         <div className="flex justify-center pt-4">

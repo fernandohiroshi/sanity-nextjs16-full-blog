@@ -27,7 +27,7 @@ const Socials = () => {
           </Avatar>
         </div>
         <div className="space-y-1">
-          <CardTitle className="text-lg font-semibold">Mais conteúdos?</CardTitle>
+          <CardTitle className="text-lg font-semibold">Mais conteúdos e novidades?</CardTitle>
           <CardDescription>
             Pode me seguir também nas redes sociais ou receber convites para encontros, novos textos
             e reflexões no seu e-mail.
