@@ -121,6 +121,18 @@ const Header = () => {
                   <CommandInput placeholder="Buscar categorias..." className="h-9" />
                   <CommandList>
                     <CommandEmpty>Nenhuma categoria encontrada.</CommandEmpty>
+                    <CommandGroup>
+                      <CommandItem
+                        value="ver-todas"
+                        onSelect={() => {
+                          setValue(null)
+                          setOpen(false)
+                          router.push('/blog')
+                        }}
+                      >
+                        Ver todas
+                      </CommandItem>
+                    </CommandGroup>
                     {categoryGroups.map((group) => (
                       <CommandGroup key={group.title} heading={group.title}>
                         {group.items.map((label) => (

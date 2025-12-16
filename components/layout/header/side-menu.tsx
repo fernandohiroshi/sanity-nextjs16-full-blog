@@ -5,7 +5,6 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { Input } from '@/components/ui/input'
 import {
   Sheet,
   SheetContent,
@@ -14,9 +13,10 @@ import {
   SheetDescription,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import { Menu, Search } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { GiButterfly } from 'react-icons/gi'
 import { mainLinks, socialLinks } from '@/components/layout/layout-links.config'
+import { BlogSearchForm } from '@/components/blog-search-form'
 
 export const SideMenu = () => {
   const [open, setOpen] = useState(false)
@@ -61,25 +61,7 @@ export const SideMenu = () => {
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
               Buscar no blog
             </p>
-            <form className="w-full" action="/blog" method="get" onSubmit={handleNavigate}>
-              <div className="flex h-9 items-center rounded-md border bg-background px-2">
-                <Input
-                  type="search"
-                  name="q"
-                  placeholder="Buscar artigos..."
-                  className="h-7 flex-1 border-0 bg-transparent p-0 text-xs shadow-none focus-visible:ring-0 focus-visible:outline-none"
-                />
-                <Button
-                  type="submit"
-                  size="icon"
-                  variant="ghost"
-                  className="ml-1 h-7 w-7 shrink-0 text-muted-foreground hover:text-foreground"
-                >
-                  <Search className="h-4 w-4" />
-                  <span className="sr-only">Buscar</span>
-                </Button>
-              </div>
-            </form>
+            <BlogSearchForm className="w-full" onSubmit={handleNavigate} />
           </div>
         </nav>
 

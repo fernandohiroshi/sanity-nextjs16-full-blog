@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const AboutSection = () => {
   return (
-    <section id="sobre" className="w-full flex justify-center">
+    <section id="sobre" className="w-full flex justify-center scroll-mt-32">
       <div className="max grid gap-8 lg:grid-cols-2 items-center">
         <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-neutral-200 dark:bg-neutral-800">
           <Image

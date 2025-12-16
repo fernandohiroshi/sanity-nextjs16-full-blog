@@ -1,18 +1,14 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-
-import { Search } from 'lucide-react'
 
 import Socials from './socials'
+import { BlogSearchForm } from '@/components/blog-search-form'
 import type { ArticleCard } from '@/types/types'
 
 type PartnerCard = {
@@ -26,22 +22,8 @@ type ArticlesSectionClientProps = {
 }
 
 export const ArticlesSectionClient = ({ articles, partners }: ArticlesSectionClientProps) => {
-  const router = useRouter()
-  const [searchText, setSearchText] = useState('')
-
-  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const query = searchText.trim()
-    if (!query) {
-      router.push('/blog')
-      return
-    }
-    const params = new URLSearchParams({ q: query })
-    router.push(`/blog?${params.toString()}`)
-  }
-
   return (
-    <section className="w-full flex justify-center py-16">
+    <section className="w-full flex justify-center py-8 md:py-16">
       <div className="max space-y-8">
         <div>
           <p className="text-xs sm:text-sm font-medium tracking-[0.2em] text-muted-foreground uppercase">
@@ -97,16 +79,7 @@ export const ArticlesSectionClient = ({ articles, partners }: ArticlesSectionCli
 
           <div className="space-y-4">
             <div className="space-y-3">
-              <form className="relative" onSubmit={handleSearchSubmit}>
-                <Search className="pointer-events-none absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Buscar artigos..."
-                  className="h-9 pl-8 text-sm"
-                  value={searchText}
-                  onChange={(event) => setSearchText(event.target.value)}
-                />
-              </form>
+              <BlogSearchForm className="w-full" />
 
               <div className="flex items-center justify-between gap-4 px-2">
                 <div>

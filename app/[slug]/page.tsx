@@ -25,8 +25,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                 {post.category}
               </p>
             )}
-            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{post.title}</h1>
-            {formattedDate && <p className="text-sm text-muted-foreground">{formattedDate}</p>}
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight">
+              {post.title}
+            </h1>
+            {formattedDate && (
+              <p className="text-xs sm:text-sm text-muted-foreground">{formattedDate}</p>
+            )}
           </header>
 
           {post.image?.asset?._ref && (

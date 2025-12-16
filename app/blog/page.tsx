@@ -51,7 +51,7 @@ export default async function BlogPage({
             ) : null}
           </div>
 
-          <p className="text-sm text-muted-foreground max-w-xl mx-auto md:mx-0">
+          <p className="text-sm text-muted-foreground max-w-xl mx-auto md:mx-0 hidden md:block">
             Conteúdos sobre marketing, turismo, eventos, hotelaria, viagens, gastronomia em Foz do
             Iguaçu e região, e muito mais.
           </p>

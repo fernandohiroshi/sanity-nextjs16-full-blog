@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import WhatsAppFloatButton from '@/components/whatsapp-button'
+import { ScrollToTop } from '@/components/scroll-to-top'
 
 export const metadata: Metadata = {
   title: 'Silvana Canal',
@@ -25,6 +26,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
+          <ScrollToTop />
           {children}
           <Footer />
           <WhatsAppFloatButton />

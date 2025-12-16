@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <footer
       id="contato"
-      className="mt-10 border-t bg-neutral-100/60 py-10 text-sm dark:bg-neutral-900/60"
+      className="mt-10 border-t bg-neutral-100/60 py-10 text-sm dark:bg-neutral-900/60 scroll-mt-32 px-2"
     >
       <div className="max space-y-8">
         <div className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]">
