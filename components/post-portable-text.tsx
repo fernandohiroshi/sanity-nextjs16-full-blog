@@ -2,17 +2,36 @@ import Image from 'next/image'
 import { PortableText, type PortableTextComponents } from '@portabletext/react'
 import type { PortableTextBlock } from '@portabletext/types'
 
-import { urlForImage } from '@/lib/sanity'
+import { projectId, dataset, urlForImage } from '@/lib/sanity'
+
+type FileValue = {
+  asset?: {
+    _ref?: string
+  }
+}
+
+type VideoEmbedValue = {
+  url?: string
+}
+
+type ImageValue = {
+  asset?: {
+    _ref?: string
+  }
+  alt?: string
+  caption?: string
+}
 
 const fileUrlFromRef = (ref: string) => {
   const [, id, extension] = ref.split('-')
-  return `https://cdn.sanity.io/files/${process.env.SANITY_PROJECT_ID}/${process.env.SANITY_DATASET}/${id}.${extension}`
+  return `https://cdn.sanity.io/files/${projectId}/${dataset}/${id}.${extension}`
 }
 
 const components: PortableTextComponents = {
   types: {
     file: ({ value }) => {
-      const ref = (value as { asset?: { _ref?: string } }).asset?._ref
+      const fileValue = value as FileValue
+      const ref = fileValue.asset?._ref
       if (!ref) return null
       const url = fileUrlFromRef(ref)
 
@@ -27,7 +46,7 @@ const components: PortableTextComponents = {
     },
 
     videoEmbed: ({ value }) => {
-      const url = (value as { url?: string })?.url
+      const { url } = value as VideoEmbedValue
       if (!url) return null
 
       return (
@@ -45,7 +64,8 @@ const components: PortableTextComponents = {
     },
 
     image: ({ value }) => {
-      const ref = value.asset?._ref
+      const imageValue = value as ImageValue
+      const ref = imageValue.asset?._ref
       if (!ref) return null
       const url = urlForImage(ref).width(800).height(600).url()
 
@@ -53,16 +73,14 @@ const components: PortableTextComponents = {
         <div className="my-4">
           <Image
             src={url}
-            alt={(value as { alt?: string }).alt || 'Imagem'}
+            alt={imageValue.alt || 'Imagem'}
             width={800}
             height={600}
             className="rounded-md"
             loading="lazy"
           />
-          {(value as { caption?: string }).caption && (
-            <p className="text-sm text-muted-foreground mt-2 text-center">
-              {(value as { caption?: string }).caption}
-            </p>
+          {imageValue.caption && (
+            <p className="text-sm text-muted-foreground mt-2 text-center">{imageValue.caption}</p>
           )}
         </div>
       )

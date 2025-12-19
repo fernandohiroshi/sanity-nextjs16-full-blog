@@ -16,10 +16,11 @@
   ],
   "dependencies": {
     "@sanity/locale-pt-br": "^1.1.27",
-    "@sanity/vision": "^4.21.1",
+    "@sanity/ui": "^3.1.11",
+    "@sanity/vision": "^4.22.0",
     "react": "^19.1",
     "react-dom": "^19.1",
-    "sanity": "^4.21.1",
+    "sanity": "^4.22.0",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {

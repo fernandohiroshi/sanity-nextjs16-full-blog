@@ -10,6 +10,8 @@ import { RelatedArticles } from '@/components/related-articles'
 
 import { getPostPageData } from './data'
 
+export const revalidate = 300
+
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 

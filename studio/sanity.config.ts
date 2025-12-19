@@ -3,6 +3,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {schemaTypes} from './schemaTypes'
 import {ptBRLocale} from '@sanity/locale-pt-br'
+import {CustomNavbar} from './customNavbar'
 
 export default defineConfig({
   name: 'default',
@@ -10,6 +11,12 @@ export default defineConfig({
 
   projectId: 'v0cenb9f',
   dataset: 'production',
+
+  studio: {
+    components: {
+      navbar: CustomNavbar,
+    },
+  },
 
   plugins: [
     structureTool({

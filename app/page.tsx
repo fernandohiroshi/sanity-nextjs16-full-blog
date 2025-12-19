@@ -6,6 +6,8 @@ import HeroSection from '@/components/hero'
 import TicketSection from '@/components/ticket'
 import { Skeleton } from '@/components/ui/skeleton'
 
+export const revalidate = 300
+
 export default function Home() {
   return (
     <main className="max">

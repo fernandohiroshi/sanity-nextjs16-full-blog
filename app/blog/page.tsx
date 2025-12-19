@@ -20,6 +20,8 @@ import {
 
 import { getBlogPageData } from './data'
 
+export const revalidate = 300
+
 export const metadata: Metadata = {
   title: 'Blog | Silvana Canal',
 }
