@@ -1,5 +1,11 @@
 import {defineField, defineType} from 'sanity'
 
+type ImageWithAssetRef = {
+  asset?: {
+    _ref?: string
+  }
+}
+
 export const heroType = defineType({
   name: 'hero',
   title: 'Anúncio',
@@ -31,7 +37,7 @@ export const heroType = defineType({
             return 'Imagem é obrigatória para anúncios'
           }
 
-          const ref = (value as any)?.asset?._ref
+          const ref = (value as ImageWithAssetRef | undefined)?.asset?._ref
           if (!ref) return 'Imagem é obrigatória para anúncios'
 
           const client = context.getClient({apiVersion: '2023-08-01'})

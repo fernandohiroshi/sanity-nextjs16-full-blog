@@ -6,7 +6,7 @@ import {ptBRLocale} from '@sanity/locale-pt-br'
 
 export default defineConfig({
   name: 'default',
-  title: 'BLOG',
+  title: 'Silvana Canal',
 
   projectId: 'v0cenb9f',
   dataset: 'production',

@@ -1,6 +1,12 @@
 import {defineField, defineType} from 'sanity'
 import {articleCategories} from '../../components/articles/articles.config'
 
+type ImageWithAssetRef = {
+  asset?: {
+    _ref?: string
+  }
+}
+
 export const articleType = defineType({
   name: 'post',
   title: 'Postagens',
@@ -35,7 +41,7 @@ export const articleType = defineType({
       description: 'Imagem de destaque do artigo (máximo 3MB). Será usada na capa e nas listagens.',
       validation: (Rule) =>
         Rule.required().custom(async (image, context) => {
-          const ref = (image as any)?.asset?._ref
+          const ref = (image as ImageWithAssetRef | undefined)?.asset?._ref
           if (!ref) return true
 
           const client = context.getClient({apiVersion: '2023-08-01'})
