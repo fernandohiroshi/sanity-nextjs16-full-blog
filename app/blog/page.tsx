@@ -75,7 +75,7 @@ export default async function BlogPage({
       {paginatedArticles.length ? (
         <section className="space-y-6">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {paginatedArticles.map((article) => (
+            {paginatedArticles.map((article, index) => (
               <Link key={article.title} href={article.href} className="block h-full">
                 <Card className="overflow-hidden p-0 flex h-full flex-col shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">
                   <div className="relative aspect-16/10 w-full overflow-hidden">
@@ -85,6 +85,7 @@ export default async function BlogPage({
                       fill
                       className="object-cover transition-transform duration-500 ease-out hover:scale-105"
                       sizes="(min-width: 1024px) 420px, 100vw"
+                      priority={index === 0}
                     />
                   </div>
                   <CardContent className="flex flex-1 flex-col gap-1 pt-2 pb-3">

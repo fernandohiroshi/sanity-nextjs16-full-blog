@@ -40,6 +40,7 @@ export const ArticlesSectionClient = ({ articles, partners }: ArticlesSectionCli
                     fill
                     className="object-cover transition-transform duration-500 ease-out hover:scale-105"
                     sizes="(min-width: 1024px) 720px, 100vw"
+                    priority
                   />
                 </div>
                 <CardContent className="flex flex-col gap-1.5 py-3.5">
@@ -127,7 +128,7 @@ export const ArticlesSectionClient = ({ articles, partners }: ArticlesSectionCli
                 Artigos recentes
               </p>
               <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-2">
-                {articles.slice(4, 12).map((article) => (
+                {articles.slice(4, 10).map((article) => (
                   <Link key={article.title} href={article.href} className="block h-full">
                     <Card className="overflow-hidden p-0 flex h-full flex-col shadow-sm transition-colors hover:bg-muted/40 hover:shadow-md">
                       <div className="relative aspect-16/10 w-full overflow-hidden">
@@ -184,7 +185,7 @@ export const ArticlesSectionClient = ({ articles, partners }: ArticlesSectionCli
                     rel="noreferrer"
                   >
                     <div className="flex justify-start py-1">
-                      <div className="relative h-44 w-full overflow-hidden rounded-lg">
+                      <div className="relative h-50 w-full overflow-hidden rounded-lg">
                         <Image
                           src={partner.image}
                           alt="Parceiro"

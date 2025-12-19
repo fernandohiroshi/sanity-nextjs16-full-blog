@@ -21,9 +21,6 @@ const TicketSection = () => {
 
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4 py-6 sm:px-6 sm:py-10">
           <div className="pointer-events-auto max-w-2xl text-center text-background space-y-3 sm:space-y-4 md:space-y-6">
-            <p className="hidden md:block text-sm font-medium tracking-[0.3em] uppercase text-white/90">
-              Foz do Iguaçu • experiências
-            </p>
             <h2 className="text-sm sm:text-base md:text-2xl font-semibold leading-snug text-white">
               Ingressos para as aventuras em <br /> Foz do Iguaçu?
             </h2>

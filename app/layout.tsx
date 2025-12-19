@@ -5,6 +5,13 @@ import Header from '@/components/layout/header'
 import Footer from '@/components/layout/footer'
 import WhatsAppFloatButton from '@/components/whatsapp-button'
 import { ScrollToTop } from '@/components/scroll-to-top'
+import { Montserrat } from 'next/font/google'
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Blog - Agência de Notícias de Foz do Iguaçu',
@@ -19,10 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning className="scroll-smooth">
-      <body>
+      <body className={`${montserrat.className} antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

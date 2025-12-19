@@ -38,7 +38,6 @@ const ARTICLES_QUERY = groq`*[_type == "post"] | order(date desc) {
   date,
   category,
   image,
-  // Usa o primeiro bloco do Portable Text do excerpt como resumo
   "excerpt": coalesce(excerpt[0].children[0].text, "")
 }`
 

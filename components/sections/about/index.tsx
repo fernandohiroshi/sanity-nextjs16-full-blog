@@ -10,7 +10,7 @@ const AboutSection = () => {
       <div className="max grid gap-8 lg:grid-cols-2 items-center">
         <div className="relative aspect-square w-full overflow-hidden rounded-2xl bg-neutral-200 dark:bg-neutral-800">
           <Image
-            src="/about.webp"
+            src="/about-img.webp"
             alt="Silhueta de uma pessoa sorrindo, representando a equipe do Blog"
             fill
             className="object-cover object-center"
@@ -22,7 +22,7 @@ const AboutSection = () => {
           <p className="text-xs sm:text-sm font-semibold tracking-[0.25em] text-foreground uppercase">
             Sobre
           </p>
-          <div className="space-y-3 text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed text-justify">
+          <div className="space-y-3 text-xs sm:text-sm text-muted-foreground leading-relaxed text-justify">
             <p>
               O Blog é uma agência de notícias independente baseada em Foz do Iguaçu, dedicada a
               contar as histórias que movem a Tríplice Fronteira. Aqui você encontra reportagens,
