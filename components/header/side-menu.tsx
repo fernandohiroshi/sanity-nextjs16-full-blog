@@ -5,6 +5,8 @@ import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { Menu } from 'lucide-react'
+import { GiButterfly } from 'react-icons/gi'
 import {
   Sheet,
   SheetContent,
@@ -13,9 +15,7 @@ import {
   SheetDescription,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import { Menu } from 'lucide-react'
-import { GiButterfly } from 'react-icons/gi'
-import { mainLinks, socialLinks } from '@/components/layout/layout-links.config'
+import { mainLinks, socialLinks } from '@/components/layout-links.config'
 import { BlogSearchForm } from '@/components/blog-search-form'
 
 export const SideMenu = () => {

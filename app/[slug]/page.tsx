@@ -3,10 +3,11 @@ import Link from 'next/link'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 
+import { getRelatedArticlesByCategory } from '@/lib/posts'
 import { getImageUrl } from '@/lib/sanity'
 import { PostPortableText } from '@/components/post-portable-text'
 import { RelatedArticles } from '@/components/related-articles'
-import { getRelatedArticlesByCategory } from '@/lib/posts'
+
 import { getPostPageData } from './data'
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {

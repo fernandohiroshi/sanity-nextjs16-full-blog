@@ -1,12 +1,11 @@
 'use client'
 
 import Link from 'next/link'
+import { ArrowUp } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { ArrowUp } from 'lucide-react'
-
-import { mainLinks, socialLinks } from '@/components/layout/layout-links.config'
+import { mainLinks, socialLinks } from '@/components/layout-links.config'
 import { BlogSearchForm } from '@/components/blog-search-form'
 
 const Footer = () => {

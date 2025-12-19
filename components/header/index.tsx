@@ -1,14 +1,14 @@
 'use client'
 
 import * as React from 'react'
-import { Check, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+import { Check, ChevronDown } from 'lucide-react'
+
+import { SideMenu } from '@/components/header/side-menu'
 import { ThemeToggle } from '@/components/theme-toggle'
-import { SideMenu } from '@/components/layout/header/side-menu'
 import { AuroraText } from '@/components/ui/aurora-text'
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   Command,
@@ -19,6 +19,7 @@ import {
   CommandList,
 } from '@/components/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
 
 const categoryGroups: { title: string; items: string[] }[] = [
   {

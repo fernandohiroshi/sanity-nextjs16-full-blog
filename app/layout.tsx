@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
-import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
-import Header from '@/components/layout/header'
-import Footer from '@/components/layout/footer'
-import WhatsAppFloatButton from '@/components/whatsapp-button'
-import { ScrollToTop } from '@/components/scroll-to-top'
 import { Montserrat } from 'next/font/google'
+
+import './globals.css'
+
+import Footer from '@/components/footer'
+import Header from '@/components/header'
+import { ScrollToTop } from '@/components/scroll-to-top'
+import { ThemeProvider } from '@/components/theme-provider'
+import WhatsAppFloatButton from '@/components/whatsapp-button'
 
 const montserrat = Montserrat({
   subsets: ['latin'],

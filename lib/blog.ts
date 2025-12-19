@@ -1,5 +1,5 @@
 import type { ArticleCard } from '@/types/types'
-import { articleCategories } from '@/components/sections/articles/articles.config'
+import { articleCategories } from '@/components/articles/articles.config'
 
 export type BlogSearchParams = {
   q?: string

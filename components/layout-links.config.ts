@@ -1,5 +1,5 @@
 import { Instagram, Twitter, Facebook } from 'lucide-react'
-import { mainArticleCategoryLabels } from '@/components/sections/articles/articles.config'
+import { mainArticleCategoryLabels } from '@/components/articles/articles.config'
 
 export type NavLink = {
   href: string

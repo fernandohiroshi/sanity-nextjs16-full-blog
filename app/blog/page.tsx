@@ -1,16 +1,14 @@
 import type { Metadata } from 'next'
-
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { buildBlogPageHref } from '@/lib/blog'
 import type { BlogSearchParams } from '@/lib/blog'
-import { getBlogPageData } from './data'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { BlogCategorySelect } from '@/components/blog-category-select'
 import { BlogSearchForm } from '@/components/blog-search-form'
-import HeroSection from '@/components/sections/hero'
+import HeroSection from '@/components/hero'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent } from '@/components/ui/card'
 import {
   Pagination,
   PaginationContent,
@@ -19,6 +17,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
+
+import { getBlogPageData } from './data'
 
 export const metadata: Metadata = {
   title: 'Blog | Silvana Canal',

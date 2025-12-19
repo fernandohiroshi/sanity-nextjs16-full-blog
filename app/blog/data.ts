@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 
 import type { ArticleCard } from '@/types/types'
-import { getArticlesForCards } from '@/lib/posts'
 import type { BlogSearchParams } from '@/lib/blog'
+import { getArticlesForCards } from '@/lib/posts'
 import {
   filterArticlesBySearchAndCategory,
   getBlogCategoryNames,

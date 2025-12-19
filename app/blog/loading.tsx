@@ -1,4 +1,4 @@
-import HeroSection from '@/components/sections/hero'
+import HeroSection from '@/components/hero'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export default function LoadingBlogPage() {

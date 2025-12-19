@@ -1,5 +1,5 @@
 import {defineField, defineType} from 'sanity'
-import {articleCategories} from '../../components/sections/articles/articles.config'
+import {articleCategories} from '../../components/articles/articles.config'
 
 export const articleType = defineType({
   name: 'post',

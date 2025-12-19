@@ -1,9 +1,9 @@
 import { Suspense } from 'react'
 
-import HeroSection from '@/components/sections/hero'
-import TicketSection from '@/components/sections/ticket'
-import AboutSection from '@/components/sections/about'
-import ArticlesSection from '@/components/sections/articles'
+import AboutSection from '@/components/about'
+import ArticlesSection from '@/components/articles'
+import HeroSection from '@/components/hero'
+import TicketSection from '@/components/ticket'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export default function Home() {
